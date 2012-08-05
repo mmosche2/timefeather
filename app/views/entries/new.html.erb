@@ -1,0 +1,70 @@
+<h1>Entries</h1>
+
+<%= form_for(@entry) do |f| %>
+	<% if @entry.errors.any? %>
+	  <div class="error_messages">
+	    <h2>Form is invalid</h2>
+	    <ul>
+	      <% @entry.errors.full_messages.each do |message| %>
+	        <li><%= message %></li>
+	      <% end %>
+	    </ul>
+	  </div>
+	<% end %>
+
+  <%# Add Project %>
+  <%= f.label :project %>
+  <%= f.select :project_id, @projects %>  
+  <%= link_to 'Add a New Project', new_project_path %> <br /><br />
+	
+  <div class="field">
+  <%= f.label :hours %><br />
+  <%= f.text_field :hours %>
+  </div>
+  
+  <%# Add Cal_date %>
+  <div class="field">
+    <%= f.label 'Calendar Date' %><br />
+    <%= f.date_select :cal_date %>
+  </div>
+  
+  <div class="field">
+    <%= f.label :notes %><br />
+    <%= f.text_area :notes %>  </div>
+
+
+  <%= f.hidden_field :user_id, :value => current_user.id %><br />
+  
+  
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
+<h1>List of entries</h1>
+
+<table>
+	<tr>
+		<th><%= sortable "name" %></th>
+		<th><%= sortable "project_id", "Project" %></th>
+		<th><%= sortable "hours" %></th>
+		<th><%= sortable "cal_date", "Date" %></th>
+		<th>Notes</th>
+		<th></th>
+	</tr>
+		
+<% @entries.each do |entry| %>
+	<tr>
+		<td><%= entry.user.email %></td>
+		<td><%= entry.project.name %></td>
+		<td><%= entry.hours %></td>
+		<td><%= entry.cal_date.strftime('%a, %b %d %Y') %></td>
+		<td><%= entry.notes %></td>
+		<td><%= link_to 'x', entry, confirm: 'Are you sure?', method: :delete %></td>
+	</tr>
+<% end %>
+</table>
+
+<h2> Total: <%= @hrs_sum %> </h2>
+

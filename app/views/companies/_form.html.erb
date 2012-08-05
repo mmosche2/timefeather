@@ -1,0 +1,39 @@
+<%= form_for @company do |c| %>  
+
+	<% if @company.errors.any? %>
+		<div class="error_messages">
+		  <h2>Form is invalid</h2>
+		  <ul class="errormessages">
+			<% for message in @company.errors.full_messages %>
+			  <li><%= message %></li>
+			<% end %>
+		  </ul>
+		</div>
+	  <% end %>
+
+	<div class="field">  
+		<%= c.label "Company name" %>  <br />
+		<%= c.text_field :name %>  
+	</div>  	  
+	
+	<%= c.fields_for :users do |u| %>
+		<div class="field">
+	    	<%= u.label "Your email" %><br />
+	    	<%= u.text_field :email %>
+	  	</div>
+	  	<div class="field">
+	    	<%= u.label :password %><br />
+	    	<%= u.password_field :password %>
+	  	</div> 
+	  	<div class="field">
+	    	<%= u.label :password_confirmation %><br />
+	    	<%= u.password_field :password_confirmation %>
+	  	</div>
+		<%= u.hidden_field :name, :value => "blank" %>
+
+	<% end %>
+	
+	<div class="actions">
+		<%= c.submit "Create" %>
+	</div>  
+<% end %>

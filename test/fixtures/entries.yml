@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  hours: 9.99
+  notes: MyText
+  cal_date: 2012-08-04
+  user: 
+  project: 
+
+two:
+  hours: 9.99
+  notes: MyText
+  cal_date: 2012-08-04
+  user: 
+  project: 
