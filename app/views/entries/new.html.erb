@@ -1,70 +1,120 @@
-<h1>Entries</h1>
+<h1> Company: <%= my_company.name %> </h1>
+<div class="column-left">
+	<h2>Entries</h2>
 
-<%= form_for(@entry) do |f| %>
-	<% if @entry.errors.any? %>
-	  <div class="error_messages">
-	    <h2>Form is invalid</h2>
-	    <ul>
-	      <% @entry.errors.full_messages.each do |message| %>
-	        <li><%= message %></li>
-	      <% end %>
-	    </ul>
+	<%= form_for(@entry) do |f| %>
+		<% if @entry.errors.any? %>
+		  <div class="error_messages">
+		    <h2>Form is invalid</h2>
+		    <ul>
+		      <% @entry.errors.full_messages.each do |message| %>
+		        <li><%= message %></li>
+		      <% end %>
+		    </ul>
+		  </div>
+		<% end %>
+
+	  <%# Add Project %>
+	  <%= f.label :project %>
+	  <%= f.select :project_id, @projects %>  
+	  <%= link_to 'Add a New Project', new_project_path %> <br /><br />
+	
+	  <div class="field">
+	  <%= f.label :hours %><br />
+	  <%= f.text_field :hours %>
+	  </div>
+  
+	  <%# Add Cal_date %>
+	  <div class="field">
+	    <%= f.label 'Calendar Date' %><br />
+	    <%= f.date_select :cal_date %>
+	  </div>
+  
+	  <div class="field">
+	    <%= f.label :notes %><br />
+	    <%= f.text_area :notes, :class => "notes-text-area" %>  </div>
+
+
+	  <%= f.hidden_field :user_id, :value => current_user.id %><br />
+  
+  
+	  <div class="actions">
+	    <%= f.submit %>
 	  </div>
 	<% end %>
 
-  <%# Add Project %>
-  <%= f.label :project %>
-  <%= f.select :project_id, @projects %>  
-  <%= link_to 'Add a New Project', new_project_path %> <br /><br />
-	
-  <div class="field">
-  <%= f.label :hours %><br />
-  <%= f.text_field :hours %>
-  </div>
-  
-  <%# Add Cal_date %>
-  <div class="field">
-    <%= f.label 'Calendar Date' %><br />
-    <%= f.date_select :cal_date %>
-  </div>
-  
-  <div class="field">
-    <%= f.label :notes %><br />
-    <%= f.text_area :notes %>  </div>
 
+	<h1>List of entries</h1>
 
-  <%= f.hidden_field :user_id, :value => current_user.id %><br />
-  
-  
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-
-
-<h1>List of entries</h1>
-
-<table>
-	<tr>
-		<th><%= sortable "name" %></th>
-		<th><%= sortable "project_id", "Project" %></th>
-		<th><%= sortable "hours" %></th>
-		<th><%= sortable "cal_date", "Date" %></th>
-		<th>Notes</th>
-		<th></th>
-	</tr>
+	<table>
+		<tr>
+			<th><%= sortable "name" %></th>
+			<th><%= sortable "project_id", "Project" %></th>
+			<th><%= sortable "hours" %></th>
+			<th><%= sortable "cal_date", "Date" %></th>
+			<th>Notes</th>
+			<th></th>
+		</tr>
 		
-<% @entries.each do |entry| %>
-	<tr>
-		<td><%= entry.user.email %></td>
-		<td><%= entry.project.name %></td>
-		<td><%= entry.hours %></td>
-		<td><%= entry.cal_date.strftime('%a, %b %d %Y') %></td>
-		<td><%= entry.notes %></td>
-		<td><%= link_to 'x', entry, confirm: 'Are you sure?', method: :delete %></td>
-	</tr>
-<% end %>
-</table>
+	<% @entries.each do |entry| %>
+		<tr>
+			<td><%= entry.user.email %></td>
+			<td><%= entry.project.name %></td>
+			<td><%= entry.hours %></td>
+			<td><%= entry.cal_date.strftime('%a, %b %d %Y') %></td>
+			<td><%= entry.notes %></td>
+			<td><%= link_to 'x', entry, confirm: 'Are you sure?', method: :delete %></td>
+		</tr>
+	<% end %>
+	</table>
 
-<h2> Total: <%= @hrs_sum %> </h2>
+	<h2> Total: <%= @hrs_sum %> </h2>
 
+</div>
+
+
+
+
+<div class="column-right">
+	<h2>Projects</h2>
+	<p><%= link_to "create new project", new_project_path %></p>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Client</th>
+			<th>Hours</th>
+			<th></th>
+		</tr>
+		<% @projects.each do |p| %>
+			<tr>
+				<td><%= p[0] %></td>
+				<td><%= p[2] %></td>
+				<td><%= p[3] %></td>
+				<td><%= link_to 'x', Project.find(p[1]), confirm: 'Are you sure?', 
+					method: :delete %></td>
+			</tr>
+		<% end %>
+	</table>
+	
+	<br />
+	
+	<h2>Employees</h2>
+	<p><%= link_to "add employees", new_user_path %></p>
+	<table>
+		<tr>
+			<th>Name</th>
+			<th>Email</th>
+			<th>Hours</th>
+			<th></th>
+		</tr>
+		<% @employees.each do |u| %>
+			<tr>
+				<td><%= u[2] %></td>
+				<td><%= u[0] %></td>
+				<td><%= u[3] %></td>
+				<td><%= link_to 'x', User.find(u[1]), confirm: 'Are you sure?', 
+					method: :delete %></td>
+			</tr>
+		<% end %>
+	</table>
+</div>

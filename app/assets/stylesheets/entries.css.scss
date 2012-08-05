@@ -1,3 +1,19 @@
 // Place all the styles related to the entries controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+div.column-left{
+	width:500px;
+	float: left;
+	padding: 0px 50px;
+}
+
+div.column-right{
+	width: 400px;
+	float: left;
+}
+
+.notes-text-area{
+	width: 400px;
+	height: 60px;
+}

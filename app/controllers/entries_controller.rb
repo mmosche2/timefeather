@@ -3,13 +3,16 @@ class EntriesController < ApplicationController
 
   def new
     @entry = Entry.new
-    @projects = find_company_projects
+    @projects = find_company_projects_sum
     @entries = my_company.entries.order(sort_column + ' ' + sort_direction)
     
     @hrs_sum = 0
   	@entries.each do |entry|
   		@hrs_sum = @hrs_sum + entry.hours
   	end
+  	
+  	@employees = find_company_employees_sum
+  	
   	
   end
 
@@ -33,10 +36,20 @@ class EntriesController < ApplicationController
   
   private
 	
-  	def find_my_projects_sum
-  		# returns a mapping [project name, id, sum of hours]
+  	def find_company_projects_sum
+  		# returns a mapping [project name, id, client info, sum of hours]
   		my_company.projects.map{
-  			|p|[p.name, p.id, p.entries.where("cal_date >= ? AND cal_date <= ?", @myfrom, @myto).reduce(0) do |sum, entry| 
+  			|p|[p.name, p.id, p.client, p.entries.reduce(0) do |sum, entry| 
+  					sum = sum + entry.hours 
+  				end
+  			]
+  		}
+  	end
+  	
+  	def find_company_employees_sum
+  		# returns a mapping [user email, id, name, sum of hours]
+  		my_company.users.map{
+  			|u|[u.email, u.id, u.name, u.entries.reduce(0) do |sum, entry| 
   					sum = sum + entry.hours 
   				end
   			]
