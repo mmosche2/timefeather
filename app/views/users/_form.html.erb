@@ -1,0 +1,50 @@
+<%= form_for @user do |f| %>
+  <% if @user.errors.any? %>
+    <div class="error_messages">
+      <h2>Form is invalid</h2>
+      <ul>
+        <% @user.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <% if @type == "edit" %>
+  	<div class="field">
+	    <%= f.label :name %><br />
+	    <%= f.text_field :name %>
+	  </div>
+  <% end %>	
+  <div class="field">
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </div>
+  <div class="field">
+    <%= f.label :password %><br />
+    <%= f.password_field :password %>
+  </div>
+  <div class="field">
+    <%= f.label :password_confirmation %><br />
+    <%= f.password_field :password_confirmation %>
+  </div>
+  <%= f.hidden_field :company_id, :value => current_user.company.id %>
+	
+  <div class="actions"><%= f.submit "Submit" %></div>
+<% end %>
+
+<%= link_to "Add a project", new_project_path %>
+
+<h1> All users at <%= current_user.company.name %> </h1>
+<ul>
+	<% @users.each do |user| %>	
+		<li>
+			<%= user.name %> - <%= user.email %> 
+			<% if user != current_user %>
+				<%= link_to "X", user, confirm: 'Are you sure?', method: :delete %>
+			<% else %>
+				(me)
+			<% end %>
+		</li>
+	<% end %>
+</ul>

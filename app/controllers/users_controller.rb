@@ -3,6 +3,7 @@ class UsersController < ApplicationController
   def new
     @user = User.new
     @users = my_company.users
+    @type = "new"
   end
   
   def create
@@ -16,6 +17,23 @@ class UsersController < ApplicationController
       render "new"
     end
   end
+  
+  
+  def edit
+    @user = User.find(params[:id])
+    @users = my_company.users
+    @type = "edit"
+  end
+  
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(params[:user])
+        redirect_to dashboard_path
+    else
+        render action: "edit"
+    end
+  end
+  
   
   def destroy
 		@user = User.find(params[:id])

@@ -2,9 +2,22 @@ class EntriesController < ApplicationController
   helper_method :sort_column, :sort_direction
 
   def new
+    
+    if (!params[:from].blank? && !params[:to].blank?)
+  		@myfrom = convert_date(params[:from])
+  		@myto = convert_date(params[:to])
+  	elsif (!params[:myfrom].blank? && !params[:myto].blank?)
+  		@myfrom = Date.strptime(params[:myfrom], "%Y-%m-%d") 
+  		@myto = Date.strptime(params[:myto], "%Y-%m-%d") 
+  	else
+  		@myfrom = Date.today.beginning_of_month
+  		@myto = Date.today
+  	end
+    
     @entry = Entry.new
     @projects = find_company_projects_sum
-    @entries = my_company.entries.order(sort_column + ' ' + sort_direction)
+        
+    @entries = my_company.entries.where("cal_date >= ? AND cal_date <= ?", @myfrom, @myto).order(sort_column + ' ' + sort_direction)
     
     @hrs_sum = 0
   	@entries.each do |entry|
@@ -48,7 +61,7 @@ class EntriesController < ApplicationController
   	
   	def find_company_employees_sum
   		# returns a mapping [user email, id, name, sum of hours]
-  		my_company.users.map{
+  		my_company.users.order("email ASC").map{
   			|u|[u.email, u.id, u.name, u.entries.reduce(0) do |sum, entry| 
   					sum = sum + entry.hours 
   				end

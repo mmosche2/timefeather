@@ -1,29 +1,3 @@
 <h1>Create a Project</h1>
-<h3>Company: <%= my_company.name %></h3>
-<h3>User: <%= current_user.email %></h3>
 
-<%= form_for @project do |f| %>
-  <% if @project.errors.any? %>
-    <div class="error_messages">
-      <h2>Form is invalid</h2>
-      <ul>
-        <% @project.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :name %><br />
-    <%= f.text_field :name %>
-  </div>
-  <div class="field">
-    <%= f.label "Client Info" %><br />
-    <%= f.text_area :client %>
-  </div>
-
-  <%= f.hidden_field :company_id, :value => my_company.id %>
-	
-  <div class="actions"><%= f.submit "Add" %></div>
-<% end %>
+<%= render 'form' %>
