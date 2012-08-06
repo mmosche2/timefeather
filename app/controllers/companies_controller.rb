@@ -1,5 +1,11 @@
 class CompaniesController < ApplicationController
   
+  before_filter :authorize, :only => :show
+  
+  def show
+    @user = current_user
+    @company = my_company
+  end
   
   def new
     @company = Company.new
@@ -16,7 +22,7 @@ class CompaniesController < ApplicationController
         
         session[:user_id] = myuser.id
        
-        redirect_to new_user_path 
+        redirect_to root_url 
     else
         render action: "new" 
     end

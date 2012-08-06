@@ -1,15 +1,6 @@
 <%= form_for @company do |c| %>  
 
-	<% if @company.errors.any? %>
-		<div class="error_messages">
-		  <h2>Form is invalid</h2>
-		  <ul class="errormessages">
-			<% for message in @company.errors.full_messages %>
-			  <li><%= message %></li>
-			<% end %>
-		  </ul>
-		</div>
-	  <% end %>
+<%= render 'shared/error_messages', :object => c.object %>
 
 	<div class="field">  
 		<%= c.label "Company name" %>  <br />

@@ -7,14 +7,12 @@ Timefeather::Application.routes.draw do
   resources :projects
   resources :entries
 
-  root :to => 'home#index'
-  get "home/index"
+  root :to => 'companies#show', id: ":id"
   
-  match '/signup', 	:to => 'users#new'
+  match '/signup', 	:to => 'companies#new'
   match '/login', 	:to => 'sessions#new'
   match '/logout', :to => 'sessions#destroy'
-  match '/dashboard', :to => 'entries#new'
-
+  match '/account', :to => 'users#account'
 
 
   # The priority is based upon order of creation:

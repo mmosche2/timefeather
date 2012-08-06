@@ -18,6 +18,11 @@ class UsersController < ApplicationController
     end
   end
   
+  def account
+    @user = current_user
+    @type = "edit"
+    render "edit"
+  end
   
   def edit
     @user = User.find(params[:id])
@@ -28,8 +33,9 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
     if @user.update_attributes(params[:user])
-        redirect_to dashboard_path
+        redirect_to root_url
     else
+        @type = "edit"
         render action: "edit"
     end
   end
@@ -44,7 +50,7 @@ class UsersController < ApplicationController
 			redirect_to root_url 
 		else
 		  @user.destroy
-			redirect_to new_user_path
+			redirect_to root_url
 	  end
 	end
   
