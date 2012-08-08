@@ -17,4 +17,8 @@
 $(document).ready( function() {
     $(".dial").knob();
     $('.tips').tooltip('hide');
+
+	$('#startdate').datepicker();
+	$('#enddate').datepicker();
+	
 });

@@ -1,18 +1,28 @@
 <div class="container mainpage"><div class="row">
-
-
+ 
   <div class="leftside span8">
     
     <div class="newentry">
       <form class="form-inline">
-        <select class="span2" name="project">
+        <!-- <div class="row">
+          <div class="span4">
+            <textarea class="span4" type="text" name="note" id="note" placeholder="note"></textarea>
+          </div>
+          <div class="span4">
+          </div>  
+        
+        
+        
+        </div> -->
+        
+        <div class="span2 projectinput"><select class="span2" name="project">
           <option value="User1">User1</option>
           <option value="User2">User2</option>
           <option value="User3">User3</option>
           <option value="User4">User4</option>
           <option value="User5">User5</option>
-        </select>
-        <select class="span2" name="project">
+        </select></div>
+        <div class="span2"><select class="span2" name="project">
           <option value="Project1">Project1</option>
           <option value="Project2">Project2</option>
           <option value="Project3">Project3</option>
@@ -24,24 +34,28 @@
           <option value="Project9">Project9</option>
           <option value="Project10">Project10</option>
           <option value="Project11">Project11</option>
-        </select>
-        <input class="span2" type="date" name="entrydate" id="entrydate" placeholder="8/4/2012">
-        <input class="span2" type="text" name="hours" id="hours" placeholder="hours">
-        <input class="span6" type="text" name="note" id="note" placeholder="note">
-        <input type="submit" name="submitentry" id="submitentry" class="btn btn-warning" value="Submit">
+        </select></div>
+        
+        
+        <div class="spanonefive"><input class="datedropdown" type="date" name="entrydate" id="entrydate" placeholder="8/4/2012"></div>
+        
+        
+        <div class="span1"><input class="span1" type="text" name="hours" id="hours" placeholder="hours"></div>
+        <div class="span1"><input type="submit" name="submitentry" id="submitentry" class="btn btn-warning" value="Submit"></div>
+        <textarea class="span6" type="text" name="note" id="note" placeholder="note"></textarea>
       </form>        
     </div><!-- NewEntry -->
 
     <div class="viewselect">
-      <select class="span2" name="project">
-        </i><option value="Entries">Entries</option>
-        </i><option value="Calendar">Calendar</option>
-        </i><option value="Trends">Trends</option>
-      </select>
+      <div data-toggle="buttons-radio">
+        <button class="btn btn-info">Entries</button>
+        <button class="offsethalf btn btn-info">Calendar</button>
+        <button class="offsethalf btn btn-info">Trends</button>
+      </div>
     </div><!-- ViewSelect -->
     
     <div class="details">
-
+      <div><p class="totalrow">9.3 hours</p></div>
       <!-- Project List -->
 			<table class="table table-bordered table-condensed">
 			  <thead>
@@ -94,12 +108,15 @@
   
   </div><!-- LeftSide -->
 
+
+
+<!-- START RIGHT SIDE -->
   <div class="RightSide span4">
-    
+
     <div class="feedback">
-      
+
       <fieldset>
-        <legend>username</legend>
+        <legend><username><%= @user.name %></legend>
         <div class="row">
           <div class="span1"><p>Week</p></div>
           <div class="span2 progress progress-striped progress-warning"><div class="bar" style="width: 55%;"></div></div>
@@ -118,42 +135,56 @@
       </fieldset>
     </div><!-- Feedback --> 
 
-    
+
+	<%= form_tag new_entry_path, :method => 'get' do %>
     <div class="filterdata">
-      <div class="row">
+      <div class="row dateselect">
         <form class="form-inline">
-          <label class="span1" for="startdate">From</label>
-          <input class="span1" type="date" name="startdate" id="startdate">
-          <label class="span1" for="endate">To</label>
-          <input class="span1" type="date" name="enddate" id="enddate">
+          <div class="span1"><label for="startdate">From</label></div>
+          <div class="span1">
+				<%= text_field(:from, '', :default => @myfrom, :class => "span1", :id => "startdate") %>
+		  </div>
+          <div class="span1"><label for="enddate">To</label></div>
+          <div class="span1">
+		  		<%= text_field(:to, '', :default => @myto, :class => "span1", :id => "enddate") %>	
+		  </div>
          </form>
       </div>
+	  <% end %>
+
+
       <div class="projectlist row">
+	
+<!-- LIST PROJECTS -->
         <div class="span2">
-          <label><input type="checkbox" name="project" value="Project1"> Project1</label>
-          <label><input type="checkbox" name="project" value="Project2"> Project2</label>
-          <label><input type="checkbox" name="project" value="Project3"> Project3</label>          
-          <label><input type="checkbox" name="project" value="Project4"> Project4</label>
-          <label><input type="checkbox" name="project" value="Project5"> Project5</label>          
-          <label><input type="checkbox" name="project" value="Project6"> Project6</label>
-          <label><input type="checkbox" name="project" value="Project7"> Project7</label>
-          <label><input type="checkbox" name="project" value="Project8"> Project8</label>          
-          <label><input type="checkbox" name="project" value="Project9"> Project9</label>          
-          <label><input type="checkbox" name="project" value="Project10"> Project10</label>                    
-          <label><input type="checkbox" name="project" value="Project11"> Project11</label>                     
+			<p><%= link_to "+ add project", new_project_path %></p>
+			
+			<% @projects.each do |p| %>	
+	          <label>
+				<input type="checkbox" name="project" value="<%= p[0] %>"> <%= p[0] %> (<%= p[3] %>)
+			  </label>
+  			<% end %>
+                  
         </div>
+
+<!-- LIST EMPLOYEES -->
         <div class="span2">
-          <label><input type="checkbox" name="user" value="User1"> User1</label>
-          <label><input type="checkbox" name="user" value="User2"> User2</label>
-          <label><input type="checkbox" name="user" value="User3"> User3</label>          
-          <label><input type="checkbox" name="user" value="User4"> User4</label>
-          <label><input type="checkbox" name="user" value="User5"> User5</label>          
-          <label><input type="checkbox" name="user" value="User6"> User6</label>
-          <label><input type="checkbox" name="user" value="User7"> User7</label>
-          <label><input type="checkbox" name="user" value="User8"> User8</label>                              
+			<p><%= link_to "+ add employee", new_user_path %></p>
+			
+			<% @employees.each do |u| %>
+          	  <label>
+				<input type="checkbox" name="user" value="<%= u[2] %>"> <%= u[2] %>  (<%= u[3] %>)
+			  </label>
+			<% end %>
+                             
         </div>
       </div>
+
+
     </div><!-- FilterData -->
-  
+
   </div><!-- RightSide -->
+
+
+
 </div></div><!--/.container-fluid, row-->

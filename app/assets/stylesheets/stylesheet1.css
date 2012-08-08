@@ -18,8 +18,12 @@ tr {
 }
 
 .mainpage {
-	margin-top: 15px;
+	margin-top: 25px;
 	background: white;
+}
+
+form {
+	margin-bottom: 0px;
 }
 
 fieldset {
@@ -55,8 +59,21 @@ th.edit {
 	font-size: 13px;
 }
 
+.viewselect {
+	text-align: center;
+}
+
+
+.totalrow {
+	text-align: right;
+	color: #faa732;
+	font-weight: bold;
+	font-size: 15px;
+}
+
 .navbar .brand {
 	color: white;
+	font-size: 30px;
 }
 
 .navbar .nav > li > a { /*Removes the shadow effect*/
@@ -71,11 +88,32 @@ th.edit {
 }
 
 .newentry {
+	border: 1px solid #D0D2D5;
 	padding: 10px;
+	margin-bottom: 20px;
 }
+
+.projectinput {
+	margin-left: 0px;
+	margin-bottom: 10px;
+}
+
+.spanonefive {
+	margin-left: 20px;
+	width: 100px;
+}
+.datedropdown {
+	width: 100px;
+}
+
+
 
 .projectlist {
 	color: #49afcd;
+}
+
+.dateselect {
+	margin-bottom: 10px;
 }
 
 .navbar-inner { /*Changes the header colors/shadow effects*/
@@ -99,15 +137,16 @@ th.edit {
           box-shadow: 0 1px 10px rgba(0, 0, 0, 0.25);
 }
 
-a.brand.topleftimage{
-	float: left;
-}
-
 .inputheader {
 	font-size: 10px;
 }
 
 .displaypercent {
 	text-align: right;
-	margin-left: 200px;
+	color: #faa732;
 }
+
+.offsethalf {
+	margin-left: 40px;
+}
+
