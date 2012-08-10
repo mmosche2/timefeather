@@ -1,0 +1,44 @@
+    
+      <div><p class="totalrow"><%= @hrs_sum %> hours</p></div>
+      <!-- Project List -->
+			<table class="table table-bordered table-condensed">
+			  <thead>
+			    <tr>	
+			      	<th><p><%= sortable "cal_date", "Date" %></p></th>
+				    <th><p><%= sortable "name", "User" %></p></th>
+			      	<th><p><%= sortable "project_id", "Project" %></p></th>
+				    <th><p><%= sortable "hours" %></p></th>
+			      	<th><p>Description</p></th>
+				    <th></th>
+			    </tr>
+			  </thead>
+			  <tbody>
+				<% @entries.each do |entry| %>
+			    <tr>
+			      	<td> <%= best_in_place entry, :cal_date, :type => :date, 
+												  :display_as => :mdmy_format,
+												  :inner_class => "span2 mdmy_format" %> </td>
+			      	<td> <%= best_in_place entry, :user_id, :type => :select, :inner_class => "span2",
+												  :collection => @editableemployees %> </td>
+				    <td> <%= best_in_place entry, :project_id, :type => :select, :inner_class => "span2", 
+												  :collection => @editableprojects %> </td>
+				    <td> <%= best_in_place entry, :hours, :inner_class => "span1" %> </td>
+  				  	<td> <%= best_in_place entry, :notes, :type => :textarea, :nil => "empty" %> </td>
+  				  	<td>
+
+<!-- EDIT IS NO LONGER NEEDED					
+						<%= link_to(edit_entry_path(entry.id), :class => "tips", :title => "Edit Entry") do %>
+							<i class="icon-pencil"></i>
+						<% end %>
+-->
+  				    	<%= link_to(entry, confirm: 'Are you sure?', method: :delete, 
+								:class => "tips", :title => "Delete Entry") do %>
+							<i class="icon-remove"></i>
+						<% end %>
+            		</td>
+			    </tr>
+
+				<% end %>
+			  </tbody>
+			</table>
+    

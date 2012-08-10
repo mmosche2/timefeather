@@ -1,7 +1,10 @@
 Timefeather::Application.routes.draw do
   
   
-  resources :sessions
+  get "password_resets/new"
+
+  resources :sessions, :only => [:new, :create, :destroy]
+  resources :password_resets
   resources :users
   resources :companies
   resources :projects

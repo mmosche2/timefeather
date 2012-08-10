@@ -10,7 +10,9 @@ body {
 footer {
 	text-align: center;
 	clear: both;
-	border-top: 1px solid black;
+	border-top: 1px solid #D0D2D5;
+	margin-top: 40px;
+	color: #999999;
 }
 
 tr {
@@ -115,6 +117,9 @@ th.edit {
 .dateselect {
 	margin-bottom: 10px;
 }
+	.dateselect .span1{
+		width: 80px;
+	}
 
 .navbar-inner { /*Changes the header colors/shadow effects*/
   min-height: 40px;

@@ -1,0 +1,28 @@
+<div class="newentry">
+  <%= form_for(@entry, :remote => true, :class => "form-inline") do |f| %>
+
+    <div class="span2 projectinput">
+      <%= f.select :user_id, @employees, {:selected => @user.id}, {:class => "span2"} %> 
+    </div>
+    <div class="span2">
+      <%= f.select :project_id, @projects, {}, {:class => "span2"} %> 
+    </div>
+    
+    <div class="spanonefive">
+		<%= f.text_field :cal_date, { :class => "datedropdown", :id =>"newentry_caldate", 
+				:value => @today.to_s(:dmdy) } %>
+	</div>
+    
+    <div class="span1">
+		<%= f.text_field :hours, { :class => "span1", :placeholder => "hours" } %>
+	</div>
+    
+	<div class="span1">
+		<%= f.submit "Submit", :class => "btn btn-warning" %>
+	</div>
+    
+	 <%= f.text_area :notes, { :class => "span6", :placeholder => "note", :rows => 2 } %>
+  
+  <% end %>
+  
+</div><!-- NewEntry -->

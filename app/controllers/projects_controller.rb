@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(params[:project])
     if @project.save
-      redirect_to new_project_path
+      redirect_to root_url
     else
       render "new"
     end
@@ -22,7 +22,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
 
     if @project.update_attributes(params[:project])
-        redirect_to dashboard_path
+        redirect_to root_url
     else
         render action: "edit" 
     end
@@ -33,7 +33,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
     @project.destroy
     
-    redirect_to new_entry_path
+    redirect_to root_url
   end
   
 end

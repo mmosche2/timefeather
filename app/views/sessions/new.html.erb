@@ -8,14 +8,20 @@
 
 <%= form_tag sessions_path do %>
 	
-  <div class="field">
+  	<div class="field">
           <%= label_tag :email %>
           <%= text_field_tag :email, params[:email] %>
-  </div>
-  <div class="field">
+  	</div>
+  	<div class="field">
           <%= label_tag :password %>
           <%= password_field_tag :password %>
-  </div>
+  	</div>
+	<p><%= link_to "forgotten password?", new_password_reset_path %></p>
+	<div class="field">
+		<%= label_tag :remember_me %>
+		<%= check_box_tag :remember_me, 1, params[:remember_me] %>
+	</div>
+	
   <div class="actions"><%= submit_tag "Log In" %>
 	
 

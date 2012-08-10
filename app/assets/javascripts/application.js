@@ -12,13 +12,23 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require jquery.purr
+//= require best_in_place
 //= require_tree .
 
 $(document).ready( function() {
     $(".dial").knob();
     $('.tips').tooltip('hide');
 
-	$('#startdate').datepicker();
-	$('#enddate').datepicker();
+	$.datepicker.setDefaults({
+		dateFormat: "D, M d yy"
+	});
+
+	$('#startdate').datepicker({ dateFormat: "M d yy"});
+	$('#enddate').datepicker({ dateFormat: "M d yy"});
+	$('#newentry_caldate').datepicker();
+	
+	$('.best_in_place').best_in_place();	
+	
 	
 });
