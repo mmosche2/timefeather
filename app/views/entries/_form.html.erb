@@ -1,5 +1,5 @@
 <div class="newentry">
-  <%= form_for(@entry, :remote => true, :class => "form-inline") do |f| %>
+  <%= form_for(@entry, :class => "form-inline") do |f| %>
 
     <div class="span2 projectinput">
       <%= f.select :user_id, @employees, {:selected => @user.id}, {:class => "span2"} %> 

@@ -97,6 +97,7 @@ class EntriesController < ApplicationController
     @entry = Entry.find(params[:id])
     @entry.destroy
 
+    flash["alert"] = 'Entry was deleted'
     redirect_to root_url 
   end
   

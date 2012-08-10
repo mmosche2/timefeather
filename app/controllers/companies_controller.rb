@@ -46,11 +46,11 @@ class CompaniesController < ApplicationController
     myuser = @company.users.first
     myuser.name = myuser.email.split('@')[0]
     
-    if @company.save
+    if @company.save 
         user = User.new(params[:users_attributes])
         
         cookies[:auth_token] = user.auth_token
-       
+        
         redirect_to root_url 
     else
         render action: "new" 
