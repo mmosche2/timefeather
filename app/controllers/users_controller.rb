@@ -2,18 +2,25 @@ class UsersController < ApplicationController
   
   def new
     @user = User.new
-    @users = my_company.users
+    @company_param = params[:company]
+    @company = @company_param ? Company.find(@company_param) : my_company
+    
     @type = "new"
   end
   
   def create
     @user = User.new(params[:user])
-    name = @user.email.split('@')[0]
-    @user.name = name
+
     if @user.save    
-      redirect_to new_user_path
+      
+      # sign the user in if they are creating the company profile
+      if !signed_in?
+        cookies[:auth_token] = @user.auth_token
+      end
+      
+      redirect_to root_url
     else
-      @users = my_company.users
+      @company = Company.find(params[:user][:company_id])
       render "new"
     end
   end

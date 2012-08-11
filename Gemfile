@@ -23,7 +23,7 @@ end
 gem 'jquery-rails'
 gem 'bcrypt-ruby', '~> 3.0.0'
 gem 'best_in_place'
-
+gem 'simple_form'
 
 
 # To use Jbuilder templates for JSON

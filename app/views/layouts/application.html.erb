@@ -4,6 +4,7 @@
   <title>Timefeather</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= csrf_meta_tags %>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 	
@@ -105,9 +106,7 @@
 	</div>
 
 
-	<% flash.each do |key, value| %>
-		<div class="flash <%= key %>"><%= value %></div>
-	<% end %>
+	<%= render 'shared/flash', :flash => flash %>
 
 
 <%= yield %>

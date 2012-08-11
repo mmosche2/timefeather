@@ -1,6 +1,6 @@
 body {
 	background: url("subtle_dots.png");
-    padding-top: 40px;
+    padding-top: 50px;
     padding-bottom: 40px;
   }
   .sidebar-nav {
@@ -102,7 +102,17 @@ th.edit {
 
 .spanonefive {
 	margin-left: 20px;
-	width: 100px;
+}
+.btn-right{
+	float:right;
+}
+.no_margin{
+	margin: 0px;
+}
+.add-entry-btn{
+	position: relative;
+	left: 360px;
+	margin-top: -70px;
 }
 .datedropdown {
 	width: 100px;

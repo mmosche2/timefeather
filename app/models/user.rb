@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
 				:format 	=> { :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i }
 	
 	validates_presence_of :password, :on => :create
+	validates_presence_of :password_confirmation, :on => :create
 	
 	before_create { generate_token(:auth_token) }
   

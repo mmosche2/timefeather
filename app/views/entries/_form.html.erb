@@ -1,3 +1,4 @@
+<!--
 <div class="newentry">
   <%= form_for(@entry, :class => "form-inline") do |f| %>
 
@@ -25,4 +26,47 @@
   
   <% end %>
   
-</div><!-- NewEntry -->
+</div> NewEntry -->
+
+<div class="newentry">
+	
+  <%= simple_form_for(@entry, :class => "form-inline") do |f| %>
+
+	<%= f.association :user, 
+					  :collection => @employees, 
+					  :selected => @user.id, 
+					  :label => false, 
+					  :input_html => { :class => "span2" },
+					  :wrapper_html => { :class => 'span2 projectinput' } %>
+	
+	<%= f.association :project, 
+					  :collection => @projects,
+					  :selected => @projects.first,
+					  :label => false, 
+	 				  :input_html => { :class => "span2" },
+	 				  :wrapper_html => { :class => 'span2' }%>	
+	
+	<%= f.input :cal_date, 
+				:as => :string, 
+				:label => false,  
+			    :input_html => { :class => "datedropdown span2", 
+								 :id =>"newentry_caldate", 
+					  			 :value => @today.to_s(:dmdy) },
+				:wrapper_html => { :class => 'spanonefive' } %>
+
+ 	<%= f.input :hours, 
+				:label => false, 
+				:input_html => { :class => "span1", :placeholder => "hours" },
+				:wrapper_html => { :class => 'span1' } %>
+
+	 <%= f.input :notes, 
+				 :label => false, 
+				 :input_html => { :class => "span6", :placeholder => "note", :rows => 2 },
+				 :wrapper_html => { :class => 'span6 no_margin' } %>
+	
+	 <%= f.submit "Add",
+			 	  :class => 'btn btn-warning add-entry-btn' %>				
+
+  <% end %>
+
+</div>

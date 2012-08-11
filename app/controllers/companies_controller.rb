@@ -38,20 +38,14 @@ class CompaniesController < ApplicationController
   
   def new
     @company = Company.new
-    user = @company.users.build
   end
 
   def create
     @company = Company.new(params[:company])
-    myuser = @company.users.first
-    myuser.name = myuser.email.split('@')[0]
     
     if @company.save 
-        user = User.new(params[:users_attributes])
-        
-        cookies[:auth_token] = user.auth_token
-        
-        redirect_to root_url 
+          
+        redirect_to new_user_path(:company => @company)
     else
         render action: "new" 
     end
