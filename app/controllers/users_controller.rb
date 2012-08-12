@@ -27,13 +27,17 @@ class UsersController < ApplicationController
   
   def account
     @user = current_user
+    @company = my_company
     @type = "edit"
     render "edit"
   end
   
   def edit
     @user = User.find(params[:id])
-    @users = my_company.users
+    
+    @company = my_company
+    @users = @company.users
+    
     @type = "edit"
   end
   
