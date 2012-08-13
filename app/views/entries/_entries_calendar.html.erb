@@ -1,0 +1,21 @@
+
+ 
+ <!-- Calendar View -->
+
+<div id="EntriesCalendar">
+  <h2 id="month">
+    <%= link_to "<", entrycalendar_path(date: @date.prev_month), :remote => true %>
+    <%= @date.strftime("%B %Y") %>
+    <%= link_to ">", entrycalendar_path(date: @date.next_month), :remote => true %>
+  </h2>
+  <%= calendar @date do |date| %>
+    <%= date.day %>
+    	<% if @cal_entry_array[date.day-1] && date.month == @date.month %>
+	      <ul>
+			<% if @cal_entry_array[date.day-1][1] != 0 %>
+	          <li><%= @cal_entry_array[date.day-1][1] %></li>
+			<% end %>
+	      </ul>
+	    <% end %>
+  <% end %>
+</div>

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20120810162325) do
+ActiveRecord::Schema.define(:version => 20120813043356) do
 
   create_table "companies", :force => true do |t|
     t.string   "name"
@@ -36,8 +36,9 @@ ActiveRecord::Schema.define(:version => 20120810162325) do
     t.string   "name"
     t.text     "client"
     t.integer  "company_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",   :null => false
+    t.datetime "updated_at",   :null => false
+    t.decimal  "budgeted_hrs"
   end
 
   add_index "projects", ["company_id"], :name => "index_projects_on_company_id"
@@ -46,12 +47,15 @@ ActiveRecord::Schema.define(:version => 20120810162325) do
     t.string   "email"
     t.string   "password_digest"
     t.integer  "company_id"
-    t.datetime "created_at",             :null => false
-    t.datetime "updated_at",             :null => false
+    t.datetime "created_at",                               :null => false
+    t.datetime "updated_at",                               :null => false
     t.string   "name"
     t.string   "auth_token"
     t.string   "password_reset_token"
     t.datetime "password_reset_sent_at"
+    t.date     "start_date"
+    t.date     "end_date"
+    t.boolean  "active",                 :default => true
   end
 
   add_index "users", ["company_id"], :name => "index_users_on_company_id"

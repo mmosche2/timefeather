@@ -1,4 +1,5 @@
 <div class="container mainpage"><div class="row">
+	
  
   <div class="leftside span8">
     
@@ -8,14 +9,25 @@
 
     <div class="viewselect">
       <div data-toggle="buttons-radio">
-        <button class="btn btn-info">Entries</button>
-        <button class="offsethalf btn btn-info">Calendar</button>
-        <button class="offsethalf btn btn-info">Trends</button>
+        <button id="EntriesTable_btn" class="btn btn-info">Entries</button>
+        <button id="EntriesCalendar_btn" class="offsethalf btn btn-info">Calendar</button>
+        <button id="EntriesTrends_btn" class="offsethalf btn btn-info">Trends</button>
       </div>
     </div><!-- ViewSelect -->
     
-	<div class="details" id="entrytable">
-		<%= render :partial => "entries/entries_table" %>
+	<div class="details">
+		<div id="entrytable_sum">
+			<p class="totalrow"><%= @hrs_sum %> hours</p>
+		</div>
+		<div id="entrytable">
+			<%= render :partial => "entries/entries_table" %>
+		</div>
+		<div id="entrycalendar_sum">
+			<p class="totalrow"><%= @cal_month_sum %> hours</p>
+		</div>
+		<div id="entrycalendar">
+			<%= render :partial => "entries/entries_calendar" %>
+		</div>
 	</div><!-- details -->
   
   </div><!-- LeftSide -->
@@ -30,19 +42,22 @@
       <fieldset>
         <legend><username><%= @user.name %></legend>
         <div class="row">
-          <div class="span1"><p>Week</p></div>
-          <div class="span2 progress progress-striped progress-warning"><div class="bar" style="width: 55%;"></div></div>
-          <div class="displaypercent"><p>55%</p></div>
+          <div class="span1"><p>Week (<%= @my_week_sum %>) </p></div>
+          <div class="span2 progress progress-striped progress-warning"><div class="bar" 
+			   style="width: <%= @utilization_week %>;"></div></div>
+          <div class="displaypercent"><p><%= @utilization_week %> - <%= @my_week_sum %>/<%= @workhours_week %></p></div>
         </div>
         <div class="row">
-          <div class="span1"><p>Month</p></div>
-          <div class="span2 progress progress-striped progress-warning"><div class="bar" style="width: 80%;"></div></div>
-          <div class="displaypercent"><p>80%</p></div>
+          <div class="span1"><p>Month (<%= @my_month_sum %>)</p></div>
+          <div class="span2 progress progress-striped progress-warning"><div class="bar" 
+				style="width: <%= @utilization_month %>;"></div></div>
+          <div class="displaypercent"><p><%= @utilization_month %> - <%= @my_month_sum %>/<%= @workhours_month %></p></div>
         </div>
         <div class="row">
-          <div class="span1"><p>Year</p></div>
-          <div class="span2 progress progress-striped progress-warning"><div class="bar" style="width: 65%;"></div></div>
-          <div class="displaypercent"><p>65%</p></div>
+          <div class="span1"><p>Year (<%= @my_year_sum %>)</p></div>
+          <div class="span2 progress progress-striped progress-warning"><div class="bar" 
+				style="width: <%= @utilization_year %>;"></div></div>
+          <div class="displaypercent"><p><%= @utilization_year %> - <%= @my_year_sum %>/<%= @workhours_year %></p></div>
         </div>
       </fieldset>
     </div><!-- Feedback --> 
@@ -67,18 +82,20 @@
 		 </div>
          </form>
       </div>
-	  <% end %>
+
 
 
       <div class="projectlist row">
 	
 <!-- LIST PROJECTS -->
         <div class="span2">
-			<p><%= link_to "+ add project", new_project_path %></p>
-			
+			<p><%= link_to "+ add project", new_project_path, :remote => true, :class => "popup_dialog" %></p>
+			<%= @filter_projects %>
 			<% @projects.each do |p| %>	
 	          <label>
-				<input type="checkbox" name="project" value="<%= p[0] %>" /> <%= p[0] %> (<%= p[2] %>)
+				<%= check_box(:filter, :projects, {:multiple => true, :checked => @filter_projects.include?(p[3].to_s)}, 
+								p[3], nil) %>
+				<%= p[0] %> (<%= p[2] %>) - <%= p[3].to_s %>
 			  </label>
   			<% end %>
                   
@@ -86,7 +103,7 @@
 
 <!-- LIST EMPLOYEES -->
         <div class="span2">
-			<p><%= link_to "+ add employee", new_user_path %></p>
+			<p><%= link_to "+ add employee", new_user_path, :remote => true, :class => "popup_dialog" %></p>
 			
 			<% @employees.each do |u| %>
           	  <label>
@@ -96,7 +113,8 @@
                              
         </div>
       </div>
-
+	  
+	<% end %>
 
     </div><!-- FilterData -->
 

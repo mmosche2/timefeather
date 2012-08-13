@@ -24,4 +24,28 @@ class ApplicationController < ActionController::Base
     helper_method :my_company
     helper_method :signed_in?
     
+    
+  	def find_company_projects
+   		# returns a mapping [project name, id]
+   		my_company.projects.map{|p|[p.id, p.name]}
+   	end
+
+  	def find_company_employees
+   		# returns a mapping [project name, id]
+   		my_company.users.map{|u|[u.id, u.name]}
+   	end
+   	
+   	def find_entries_sum(from, to)
+      current_user.entries.where("cal_date >= ? AND cal_date <= ?", from, to).reduce(0) do |sum, entry|
+        sum = sum + entry.hours
+      end
+    end
+    
+    
+  	
+    helper_method :find_company_projects
+    helper_method :find_company_employees
+    helper_method :find_entries_sum
+    
+    
 end

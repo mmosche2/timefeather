@@ -32,6 +32,9 @@ class EntriesController < ApplicationController
 
   def create
     @entry = Entry.new(params[:entry])
+    if (@entry.notes.empty?)
+        @entry.notes = "---"
+    end
     
 	  if @entry.save
 	    flash["alert alert-success"] = 'Entry was successfully created'
@@ -93,6 +96,56 @@ class EntriesController < ApplicationController
   end
   
  
+  def entrytable
+    @today = Date.today
+    if (!params[:from].blank? && !params[:to].blank?)
+  		@myfrom = Date.strptime(params[:from][0], "%b %e %Y")
+  		@myto = Date.strptime(params[:to][0], "%b %e %Y")
+  	elsif (!params[:myfrom].blank? && !params[:myto].blank?)
+  		@myfrom = Date.strptime(params[:myfrom], "%Y-%m-%d") 
+  		@myto = Date.strptime(params[:myto], "%Y-%m-%d") 
+  	else
+  		@myfrom = @today.beginning_of_month
+  		@myto = @today
+  	end
+  	
+  	@entries = my_company.entries.where("cal_date >= ? AND cal_date <= ?", @myfrom, @myto).order(sort_column + ' ' + sort_direction)
+    
+    @filter_projects = params[:filter_projects]
+  	if (!@filter_projects.blank?)	
+  	    @entries = @entries.where("project_id in (?)", @filter_projects)
+  	else
+  		@filter_projects = my_company.projects.map{|p| p.id.to_s}
+  	end
+  	
+    @editableprojects = find_company_projects
+    @editableemployees = find_company_employees
+    
+  end
+  
+  def entrycalendar
+    # PULL CALENDAR ENTRIES
+    @company = my_company
+  	@date = @date = params[:date] ? Date.parse(params[:date]) : Date.today
+  	@calendar_entries = @company.entries.where("cal_date >= ? AND cal_date <= ?", 
+  	                                           @date.beginning_of_month, @date.end_of_month)
+                                               
+  	@cal_entry_array = (@date.beginning_of_month..@date.end_of_month).map{
+  	  |d|[d, @calendar_entries.where("cal_date = ?", d).reduce(0) do |sum, entry| 
+ 					sum = sum + entry.hours 
+ 				end
+ 			]
+  	}
+  	
+  	@cal_month_sum =  @calendar_entries.reduce(0) do |sum, entry|
+                        sum = sum + entry.hours
+                      end
+    
+  end
+ 
+ 
+ 
+ 
   def destroy
     @entry = Entry.find(params[:id])
     @entry.destroy
@@ -114,24 +167,16 @@ class EntriesController < ApplicationController
  		}
  	end
 
- 	def find_company_employees_sum
- 		# returns a mapping [user name, email, sum of hours, id]
- 		my_company.users.order("email ASC").map{
- 			|u|[u.name, u.email, u.entries.reduce(0) do |sum, entry| 
- 					sum = sum + entry.hours 
- 				end, u.id
- 			]
- 		}
- 	end
+ 	  def find_company_employees_sum
+   		# returns a mapping [user name, email, sum of hours, id]
+   		my_company.users.order("email ASC").map{
+   			|u|[u.name, u.email, u.entries.reduce(0) do |sum, entry| 
+   					sum = sum + entry.hours 
+   				end, u.id
+   			]
+   		}
+   	end
 	
-  	def find_company_projects
-  		# returns a mapping [project name, id]
-  		my_company.projects.map{|p|[p.name, p.id]}
-  	end
-  	
-  	def find_company_entries
-  		my_company.projects.entries
-  	end
 	
   	def convert_date(obj)
   	  return Date.new(obj['(1i)'].to_i,obj['(2i)'].to_i,obj['(3i)'].to_i)

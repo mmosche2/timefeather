@@ -16,6 +16,9 @@ Timefeather::Application.routes.draw do
   match '/login', 	:to => 'sessions#new'
   match '/logout', :to => 'sessions#destroy'
   match '/account', :to => 'users#account'
+  match '/employeestatus', :to => 'users#changestatus'
+  match '/entrytable', :to => 'entries#entrytable'
+  match '/entrycalendar', :to => 'entries#entrycalendar'
 
 
   # The priority is based upon order of creation:

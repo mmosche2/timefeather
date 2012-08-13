@@ -5,6 +5,7 @@
 
     <%= f.input :name %>
     <%= f.input :client, :input_html => { :rows => 2 } %>
+	<%= f.input :budgeted_hrs, :label => 'Budgeted Hours' %>
     <%= f.hidden_field :company_id, :value => my_company.id %>
 	<%= f.button :submit %>
 

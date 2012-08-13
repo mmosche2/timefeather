@@ -20,6 +20,12 @@ $(document).ready( function() {
     $(".dial").knob();
     $('.tips').tooltip('hide');
 
+	
+	$("#EntriesTable_btn").click(function() {
+		
+	});
+	
+
 	$.datepicker.setDefaults({
 		dateFormat: "D, M d yy"
 	});
@@ -27,8 +33,23 @@ $(document).ready( function() {
 	$('#startdate').datepicker({ dateFormat: "M d yy"});
 	$('#enddate').datepicker({ dateFormat: "M d yy"});
 	$('#newentry_caldate').datepicker();
+	$('#UserStartDate').datepicker();
 	
 	$('.best_in_place').best_in_place();	
 	
+	var $dialog = $('<div id="popup_dialog_box"></div>')
+			.html("")
+			.dialog({
+				autoOpen: false,
+				height: 300,
+				width: 450,
+				modal: true,
+				title: 'Add New'
+			});
+			
+	$('a.popup_dialog').click(function() {
+					$dialog.dialog('open');
+					
+				});
 	
 });

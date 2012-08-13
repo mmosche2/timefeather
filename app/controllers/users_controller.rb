@@ -28,8 +28,16 @@ class UsersController < ApplicationController
   def account
     @user = current_user
     @company = my_company
+    @startdate = @user.start_date
+    @startdate = @startdate ? @startdate.to_s(:dmdy) : nil
+    
     @type = "edit"
     render "edit"
+  end
+
+  def changestatus
+     @user = current_user
+     render 'changestatus'
   end
   
   def edit
