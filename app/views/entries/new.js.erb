@@ -1,1 +1,10 @@
 $("#entrytable").html("<%= escape_javascript( render('entries/entries_table') )%>");
+
+$('.best_in_place').bind("ajax:success", function(){
+	// highlight effect
+	$(this).closest('tr').effect('highlight');
+	
+	// this calls entries#updatejs, which calls entries/update.js.erb
+	$.getScript('entries/update.js.erb');	
+
+});

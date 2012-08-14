@@ -8,9 +8,8 @@ class CompaniesController < ApplicationController
     @user = current_user
     @company = my_company
     
+    # LOGIC FOR DATE FILTER (TO/FROM)
     @today = Date.today
-    
-    
     if (!params[:from].blank? && !params[:to].blank?)
   		@myfrom = Date.strptime(params[:from][0], "%b %e %Y")
   		@myto = Date.strptime(params[:to][0], "%b %e %Y")
@@ -22,8 +21,10 @@ class CompaniesController < ApplicationController
   		@myto = @today
   	end
   	
+  	# FIND ENTRIES FILTERED BY DATE
   	@entries = my_company.entries.where("cal_date >= ? AND cal_date <= ?", @myfrom, @myto).order(sort_column + ' ' + sort_direction)
   	
+  	# LOGIC FOR PROJECTS/EMPLOYEES FILTER
   	if (!params[:filter].blank?)	
 	    @filter_projects = params[:filter][:projects]
 	    if (@filter_projects.blank?) #if project filter blank, set to all projects
@@ -38,28 +39,27 @@ class CompaniesController < ApplicationController
   		@filter_employees = current_user.id.to_s
   	end
   	
-  	#PROJECTS FILTER
+  	# NEXT ENTRY FILTER - PROJECTS
   	@entries = @entries.where("project_id in (?)", @filter_projects)
   	
-  	#EMPLOYEES FILTER
+  	# NEXT ENTRY FILTER - EMPLOYEES
   	@entries = @entries.where("user_id in (?)", @filter_employees)
     
-    
+    # VARIABLES - NEW ENTRY BOX
     @entry = Entry.new
     @projects = find_company_projects_sum
-    @editableprojects = find_company_projects
     @employees = find_company_employees_sum
+    
+    # VARIABLES - ENTRY TABLE
+    @editableprojects = find_company_projects
    	@editableemployees = find_company_employees   
     
-    
+    # SUM FOR ENTRY TABLE
     @hrs_sum = 0
   	@entries.each do |entry|
   		@hrs_sum = @hrs_sum + entry.hours
   	end
 
-  	
-  	
-  	
   	
   	# DETERMINE USER METRICS
   	@firstofweek = @today.beginning_of_week
@@ -111,9 +111,7 @@ class CompaniesController < ApplicationController
 
   def create
     @company = Company.new(params[:company])
-    
     if @company.save 
-          
         redirect_to new_user_path(:company => @company)
     else
         render action: "new" 
@@ -121,6 +119,8 @@ class CompaniesController < ApplicationController
   end
 
 
+
+################# PRIVATE METHODS ################# 
   private
   
 
@@ -135,7 +135,7 @@ class CompaniesController < ApplicationController
       business_days
     end
     
-
+    # USED FOR NEW ENTRY LISTS -- client/sum not needed?
    	def find_company_projects_sum
    		# returns a mapping [project name, client info, sum of hours, id]
    		my_company.projects.map{
@@ -146,7 +146,7 @@ class CompaniesController < ApplicationController
    		}
    	end
    	
-
+    # USED FOR NEW ENTRY LISTS -- email/sum not needed?
    	def find_company_employees_sum
    		# returns a mapping [user name, email, sum of hours, id]
    		my_company.users.order("email ASC").map{
@@ -157,27 +157,6 @@ class CompaniesController < ApplicationController
    		}
    	end
 
-   	def find_company_projects
-   		# returns a mapping [project name, id]
-   		my_company.projects.map{|p|[p.id, p.name]}
-   	end
-   	
-   	def find_company_employees
-   		# returns a mapping [project name, id]
-   		my_company.users.map{|u|[u.id, u.name]}
-   	end
-
-   	def find_company_entries
-   		my_company.projects.entries
-   	end
-
-  	def sort_column
-       Entry.column_names.include?(params[:sort]) ? params[:sort] : "name"
-    end
-
-    def sort_direction
-      %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
-    end
     
     
     

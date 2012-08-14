@@ -20,6 +20,8 @@ Timefeather::Application.routes.draw do
   match '/entrytable', :to => 'entries#entrytable'
   match '/entrycalendar', :to => 'entries#entrycalendar'
 
+  match '/entries/update.js.erb', :to => 'entries#updatejs'
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

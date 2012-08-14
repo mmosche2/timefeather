@@ -1,7 +1,8 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery
   
-  
+
+################# PRIVATE METHODS #################   
   private
     
     def current_user
@@ -23,6 +24,17 @@ class ApplicationController < ActionController::Base
     helper_method :current_user
     helper_method :my_company
     helper_method :signed_in?
+    
+    
+    def sort_column
+       Entry.column_names.include?(params[:sort]) ? params[:sort] : "name"
+    end
+
+    def sort_direction
+      %w[asc desc].include?(params[:direction]) ?  params[:direction] : "asc"
+    end
+    
+    helper_method :sort_column, :sort_direction
     
     
   	def find_company_projects

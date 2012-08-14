@@ -48,8 +48,18 @@ $(document).ready( function() {
 			});
 			
 	$('a.popup_dialog').click(function() {
-					$dialog.dialog('open');
-					
-				});
+		$dialog.dialog('open');				
+	});
+	
+	
+	
+	$('.best_in_place').bind("ajax:success", function(){
+		// highlight effect
+		$(this).closest('tr').effect('highlight');
+		
+		// this calls entries#updatejs, which calls entries/update.js.erb
+		$.getScript('entries/update.js.erb');	
+
+	});
 	
 });

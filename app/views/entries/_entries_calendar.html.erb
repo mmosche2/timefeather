@@ -3,6 +3,8 @@
  <!-- Calendar View -->
 
 <div id="EntriesCalendar">
+	
+  <!-- DISPLAY MONTH AND LINKS TO NEXT/PREV MONTH -->
   <h2 id="month">
     <%= link_to "<", entrycalendar_path(date: @date.prev_month, :filter_projects => @filter_projects,
 											:filter_employees => @filter_employees ), :remote => true %>
@@ -10,6 +12,8 @@
     <%= link_to ">", entrycalendar_path(date: @date.next_month, :filter_projects => @filter_projects,
 											:filter_employees => @filter_employees), :remote => true %>
   </h2>
+
+  <!-- DISPLAY CALENDAR -->
   <%= calendar @date do |date| %>
     <%= date.day %>
     	<% if @cal_entry_array[date.day-1] && date.month == @date.month %>
@@ -20,4 +24,5 @@
 	      </ul>
 	    <% end %>
   <% end %>
+
 </div>
