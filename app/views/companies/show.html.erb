@@ -90,12 +90,12 @@
 <!-- LIST PROJECTS -->
         <div class="span2">
 			<p><%= link_to "+ add project", new_project_path, :remote => true, :class => "popup_dialog" %></p>
-			<%= @filter_projects %>
+
 			<% @projects.each do |p| %>	
 	          <label>
 				<%= check_box(:filter, :projects, {:multiple => true, :checked => @filter_projects.include?(p[3].to_s)}, 
 								p[3], nil) %>
-				<%= p[0] %> (<%= p[2] %>) - <%= p[3].to_s %>
+				<%= p[0] %> (<%= p[2] %>)
 			  </label>
   			<% end %>
                   
@@ -107,7 +107,9 @@
 			
 			<% @employees.each do |u| %>
           	  <label>
-				<input type="checkbox" name="user" value="<%= u[0] %>" /> <%= u[0] %>  (<%= u[2] %>)
+				<%= check_box(:filter, :employees, {:multiple => true, :checked => @filter_employees.include?(u[3].to_s)}, 
+								u[3], nil) %>
+				<%= u[0] %>  (<%= u[2] %>)
 			  </label>
 			<% end %>
                              

@@ -26,18 +26,30 @@ class CompaniesController < ApplicationController
   	
   	if (!params[:filter].blank?)	
 	    @filter_projects = params[:filter][:projects]
-  	  if (!@filter_projects.blank?)
-  	    @entries = @entries.where("project_id in (?)", @filter_projects)
+	    if (@filter_projects.blank?) #if project filter blank, set to all projects
+	      @filter_projects = my_company.projects.map{|p| p.id.to_s}
   	  end
-  	    	
+  	  @filter_employees = params[:filter][:employees]  	
+  	  if (@filter_employees.blank?) #if employee filter blank, set to current user
+  	    @filter_employees = current_user.id.to_s
+	    end
   	else
   		@filter_projects = my_company.projects.map{|p| p.id.to_s}
+  		@filter_employees = current_user.id.to_s
   	end
+  	
+  	#PROJECTS FILTER
+  	@entries = @entries.where("project_id in (?)", @filter_projects)
+  	
+  	#EMPLOYEES FILTER
+  	@entries = @entries.where("user_id in (?)", @filter_employees)
+    
     
     @entry = Entry.new
     @projects = find_company_projects_sum
     @editableprojects = find_company_projects
-        
+    @employees = find_company_employees_sum
+   	@editableemployees = find_company_employees   
     
     
     @hrs_sum = 0
@@ -46,8 +58,7 @@ class CompaniesController < ApplicationController
   	end
 
   	
-  	@employees = find_company_employees_sum
-  	@editableemployees = find_company_employees
+  	
   	
   	
   	# DETERMINE USER METRICS
@@ -78,7 +89,7 @@ class CompaniesController < ApplicationController
   	
   	# PULL CALENDAR ENTRIES
   	@date = @date = params[:date] ? Date.parse(params[:date]) : Date.today
-  	@calendar_entries = @company.entries.where("cal_date >= ? AND cal_date <= ?", 
+  	@calendar_entries = @entries.where("cal_date >= ? AND cal_date <= ?", 
   	                                           @date.beginning_of_month, @date.end_of_month)
                                                
   	@cal_entry_array = (@date.beginning_of_month..@date.end_of_month).map{
@@ -88,7 +99,9 @@ class CompaniesController < ApplicationController
  			]
   	}
   	
-  	@cal_month_sum = find_entries_sum(@date.beginning_of_month, @date.end_of_month)
+  	@cal_month_sum = @calendar_entries.reduce(0) do |sum, entry|
+                        sum = sum + entry.hours
+                      end
   	
   end
   

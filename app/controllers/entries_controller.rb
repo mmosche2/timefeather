@@ -112,11 +112,20 @@ class EntriesController < ApplicationController
   	@entries = my_company.entries.where("cal_date >= ? AND cal_date <= ?", @myfrom, @myto).order(sort_column + ' ' + sort_direction)
     
     @filter_projects = params[:filter_projects]
-  	if (!@filter_projects.blank?)	
-  	    @entries = @entries.where("project_id in (?)", @filter_projects)
-  	else
-  		@filter_projects = my_company.projects.map{|p| p.id.to_s}
-  	end
+    @filter_employees = params[:filter_employees]
+    if (@filter_projects.blank?)	#if project filter blank, set to all projects
+      @filter_projects = my_company.projects.map{|p| p.id.to_s}
+    end
+    if (@filter_employees.blank?)	#if employee filter blank, set to current user
+      @filter_employees = current_user.id.to_s
+    end
+
+  	#PROJECTS FILTER
+  	@entries = @entries.where("project_id in (?)", @filter_projects)
+  	
+  	#EMPLOYEES FILTER
+  	@entries = @entries.where("user_id in (?)", @filter_employees)
+  	
   	
     @editableprojects = find_company_projects
     @editableemployees = find_company_employees
@@ -124,10 +133,26 @@ class EntriesController < ApplicationController
   end
   
   def entrycalendar
+    
+    @filter_projects = params[:filter_projects]
+    @filter_employees = params[:filter_employees]
+    if (@filter_projects.blank?)	#if project filter blank, set to all projects
+      @filter_projects = my_company.projects.map{|p| p.id.to_s}
+    end
+    if (@filter_employees.blank?)	#if employee filter blank, set to current user
+      @filter_employees = current_user.id.to_s
+    end
+
+  	#PROJECTS FILTER
+  	@entries = my_company.entries.where("project_id in (?)", @filter_projects)
+  	
+  	#EMPLOYEES FILTER
+  	@entries = @entries.where("user_id in (?)", @filter_employees)
+    
     # PULL CALENDAR ENTRIES
     @company = my_company
   	@date = @date = params[:date] ? Date.parse(params[:date]) : Date.today
-  	@calendar_entries = @company.entries.where("cal_date >= ? AND cal_date <= ?", 
+  	@calendar_entries = @entries.where("cal_date >= ? AND cal_date <= ?", 
   	                                           @date.beginning_of_month, @date.end_of_month)
                                                
   	@cal_entry_array = (@date.beginning_of_month..@date.end_of_month).map{

@@ -4,9 +4,11 @@
 
 <div id="EntriesCalendar">
   <h2 id="month">
-    <%= link_to "<", entrycalendar_path(date: @date.prev_month), :remote => true %>
+    <%= link_to "<", entrycalendar_path(date: @date.prev_month, :filter_projects => @filter_projects,
+											:filter_employees => @filter_employees ), :remote => true %>
     <%= @date.strftime("%B %Y") %>
-    <%= link_to ">", entrycalendar_path(date: @date.next_month), :remote => true %>
+    <%= link_to ">", entrycalendar_path(date: @date.next_month, :filter_projects => @filter_projects,
+											:filter_employees => @filter_employees), :remote => true %>
   </h2>
   <%= calendar @date do |date| %>
     <%= date.day %>
