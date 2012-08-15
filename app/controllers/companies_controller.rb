@@ -22,7 +22,7 @@ class CompaniesController < ApplicationController
   	end
   	
   	# FIND ENTRIES FILTERED BY DATE
-  	@entries = my_company.entries.where("cal_date >= ? AND cal_date <= ?", @myfrom, @myto).order(sort_column + ' ' + sort_direction)
+  	@entries = my_company.entries.where("cal_date >= ? AND cal_date <= ?", @myfrom, @myto).order('cal_date DESC')
   	
   	# LOGIC FOR PROJECTS/EMPLOYEES FILTER
   	if (!params[:filter].blank?)	
