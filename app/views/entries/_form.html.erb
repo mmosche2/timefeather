@@ -1,32 +1,42 @@
 
 <div class="newentry">
-  <%= form_for(@entry, :class => "form-inline") do |f| %>
+  
+  <%= form_for(@entry, :class => "form-inline clearbottommargin") do |f| %>
 
-    <div class="span2 projectinput">
-      <%= f.select :user_id, @employees, {:selected => @user.id}, {:class => "span2"} %> 
+  <div class="row">
+  
+    <div class="span2 pullright">
+      <%= f.select :user_id, @employees, {:selected => @user.id}, {:class => "span2 clearbottommargin"} %> 
+      <p><%= link_to "+ new employee", new_user_path, :remote => true, :class => "popup_dialog smallfont" %></p>
     </div>
-    <div class="span2">
-      <%= f.select :project_id, @projects, {}, {:class => "span2"} %> 
+  
+    <div class="span2 pullright">
+      <%= f.select :project_id, @projects, {}, {:class => "span2 clearbottommargin"} %>
+      <p><%= link_to "+ new project", new_project_path, :remote => true, :class => "popup_dialog smallfont" %></p> 
     </div>
-    
+  
     <div class="spanonefive">
-    <%= f.text_field :cal_date, { :class => "datedropdown", :id =>"newentry_caldate", 
-        :value => @today.to_s(:dmdy) } %>
-  </div>
-    
+      <%= f.text_field :cal_date, { :class => "datedropdown", :id =>"newentry_caldate", :value => @today.to_s(:dmdy) } %>
+    </div>
+  
     <div class="span1">
-    <%= f.text_field :hours, { :class => "span1", :placeholder => "hours" } %>
-  </div>
-    
-  <div class="span1">
-    <%= f.submit "Submit", :class => "btn btn-warning" %>
-  </div>
-    
-   <%= f.text_area :notes, { :class => "span6", :placeholder => "note", :rows => 2 } %>
+      <%= f.text_field :hours, { :class => "span1", :placeholder => "hours" } %>
+    </div>
   
-  <% end %>
+  </div> <!-- row -->
+
+  <div class="row">
+    <div class="span5">
+      <%= f.text_area :notes, { :class => "span5 clearbottommargin", :placeholder => "note", :rows => 2 } %>
+    </div>
+    <div class="span1">
+     <%= f.submit "Submit Entry", :class => "btn btn-warning submitbutton clearbottommargin" %>
+    </div>  
+  </div> <!-- row -->
   
-</div> <!-- NewEntry -->
+ <% end %>
+  
+</div>
 
 <!-- <div class="newentry">
   

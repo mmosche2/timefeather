@@ -2,10 +2,7 @@ body {
 	background: url("subtle_dots.png");
     padding-top: 50px;
     padding-bottom: 40px;
-  }
-  .sidebar-nav {
-    padding: 9px 0;
-  }
+}
 
 footer {
 	text-align: center;
@@ -19,11 +16,6 @@ tr {
 	font-size: 11px;
 }
 
-.mainpage {
-	margin-top: 25px;
-	background: white;
-}
-
 form {
 	margin-bottom: 0px;
 }
@@ -35,19 +27,21 @@ fieldset {
 	-webkit-box-shadow: inset 0 1px 0 white,0 1px 0 white;
 	box-shadow: inset 0 1px 0 white,0 1px 0 white;
 	margin: -3px 0 18px 0;
-	padding: 9px;
+	padding: 9px;	
+
 }
+
 legend {
 	display: inline;
 /*  width: 100%;*/
 	padding: 0px 5px;
 	margin-bottom: 0px;
 	font-size: 16px;
-	line-height: 36px;
+	line-height: 24px;
 	color: #faa732;
 	border: 0;
 	border-bottom: none;
-	
+
 	font-weight: bold;
 }
 
@@ -60,11 +54,6 @@ th.edit {
 	padding-bottom: 0;
 	font-size: 13px;
 }
-
-.viewselect {
-	text-align: center;
-}
-
 
 .totalrow {
 	text-align: right;
@@ -84,24 +73,47 @@ th.edit {
 	color: white;
 }
 
-.newentry, .feedback, .details, .filterdata, .viewselect {
+.topentryrow {
+	margin-bottom: 7px;
+}
+
+.mainpage {
+	margin-top: 25px;
+	background: white;
+}
+
+.sidebar-nav {
+	padding: 9px 0;
+}
+
+.spanhalf {
+	width: 40px;
+	margin-left: 20px;
+}
+
+.newentry, .feedback, .selectdetails, .filterdata {
 	margin-bottom: 5px;
 /*	border: 1px black dashed;*/
 }
 
-.newentry {
+.newentry{
 	border: 1px solid #D0D2D5;
 	padding: 10px;
 	margin-bottom: 20px;
 }
 
-.projectinput {
+/*.filterdata {
+	border-right: 1px solid #D0D2D5;
+}*/
+
+.userinput {
 	margin-left: 0px;
 	margin-bottom: 10px;
 }
 
 .spanonefive {
 	margin-left: 20px;
+	width: 100px;
 }
 .btn-right{
 	float:right;
@@ -165,3 +177,22 @@ th.edit {
 	margin-left: 40px;
 }
 
+.statusbar .progress {
+	margin-bottom: 2px;
+}
+
+
+
+
+
+.pullright {
+  text-align: right;
+}
+
+.smallfont {
+  font-size: 10px;
+}
+
+.clearbottommargin {
+  margin-bottom: 0px;
+}
