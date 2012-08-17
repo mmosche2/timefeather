@@ -1,50 +1,4 @@
-<<<<<<< HEAD
-<div class="container mainpage"><div class="row">
-	
- 
-  <div class="leftside span8">
-    
-
-	<%= render :partial => "entries/form" %>
-    
-
-    <div class="viewselect">
-      <div data-toggle="buttons-radio">
-	
-		<%= link_to "Entries", entrytable_path(:sort => "cal_date", :direction => "desc",
-											   :myfrom => @myfrom, :myto => @myto, 
-											   :filter_projects => @filter_projects,
-											   :filter_employees => @filter_employees), 
-					:remote => true, :id => "EntriesTable_btn", :class => "btn btn-info" %>
-
-		<%= link_to "Calendar", entrycalendar_path(:sort => "cal_date", :direction => "desc",
-											   :myfrom => @myfrom, :myto => @myto, 
-											   :filter_projects => @filter_projects,
-											   :filter_employees => @filter_employees), 
-					:remote => true, :id => "EntriesCalendar_btn", :class => "offsethalf btn btn-info" %>
-					
-        <button id="EntriesTrends_btn" class="offsethalf btn btn-info">Trends</button>
-
-      </div>
-    </div><!-- ViewSelect -->
-    
-	<div class="details">
-		<div id="entrytable_sum">
-			<p class="totalrow"><%= @hrs_sum %> hours</p>
-		</div>
-		<div id="entrytable">
-			<%= render :partial => "entries/entries_table" %>
-		</div>
-		<div id="entrycalendar_sum">
-			<p class="totalrow"><%= @cal_month_sum %> hours</p>
-		</div>
-		<div id="entrycalendar">
-			<%= render :partial => "entries/entries_calendar" %>
-		</div>
-	</div><!-- details -->
-=======
 <div class="container mainpage">
->>>>>>> design changes to main (entries) page
   
   <div class="row"> <!-- New Entry, Feedback -->
 	  
@@ -86,9 +40,28 @@
 	    
 	    <div class="viewselect">
         <div data-toggle="buttons-radio">
+        
+        <!--
           <button id="EntriesTable_btn" class="btn btn-info"><i class="icon-list-alt icon-white"></i> Entries</button>
           <button id="EntriesCalendar_btn" class="btn btn-info"><i class="icon-calendar icon-white"></i> Calendar</button>
           <button id="EntriesTrends_btn" class="btn btn-info"><i class="icon-signal icon-white"></i> Trends</button>
+        -->
+        
+          <%= link_to "Entries", entrytable_path(:sort => "cal_date", :direction => "desc",
+      											   :myfrom => @myfrom, :myto => @myto, 
+      											   :filter_projects => @filter_projects,
+      											   :filter_employees => @filter_employees), 
+      					:remote => true, :id => "EntriesTable_btn", :class => "btn btn-info" %>
+
+      		<%= link_to "Calendar", entrycalendar_path(:sort => "cal_date", :direction => "desc",
+      											   :myfrom => @myfrom, :myto => @myto, 
+      											   :filter_projects => @filter_projects,
+      											   :filter_employees => @filter_employees), 
+      					:remote => true, :id => "EntriesCalendar_btn", :class => "btn btn-info" %>
+
+              <button id="EntriesTrends_btn" class="btn btn-info">Trends</button>
+          
+          
         </div>
       </div> <!-- ViewSelect -->
 	    
@@ -138,9 +111,9 @@
 	  <div class="span8 details"> <!-- Details -->
 	    
     	<div class="selectdetails">
-        <!-- <div id="entrytable_sum">
+        <div id="entrytable_sum">
           <p class="totalrow"><%= @hrs_sum %> hours</p>
-        </div> -->
+        </div> 
     		<div id="entrytable">
     			<%= render :partial => "entries/entries_table" %>
     		</div>
