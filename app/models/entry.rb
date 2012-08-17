@@ -11,5 +11,12 @@ class Entry < ActiveRecord::Base
     cal_date.strftime('%a, %b %-d %Y')
   end
   
+  def sum_hours(entries)
+    entries.each do |entry|
+  		@hrs_sum = @hrs_sum + entry.hours
+  	end
+  	return @hrs_sum
+  end
+  
   
 end
