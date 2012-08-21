@@ -103,6 +103,11 @@ class CompaniesController < ApplicationController
                         sum = sum + entry.hours
                       end
   	
+  	
+  	# PLACEHOLDER FOR TRENDS
+  	@project_sum_array = []
+  	@employee_sum_array = []
+  	
   end
   
   def new

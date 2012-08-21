@@ -20,21 +20,6 @@ $(document).ready( function() {
     $(".dial").knob();
     $('.tips').tooltip('hide');
 
-	
-	$("#EntriesTable_btn").click(function() {
-		$('#entrycalendar_sum').hide();
-		$('#entrycalendar').hide();
-		$('#entrytable_sum').show();
-		$('#entrytable').show();
-	});
-	
-	$("#EntriesCalendar_btn").click(function() {
-		$('#entrycalendar_sum').show();
-		$('#entrycalendar').show();
-		$('#entrytable_sum').hide();
-		$('#entrytable').hide();
-	});
-	
 
 	$.datepicker.setDefaults({
 		dateFormat: "D, M d yy"
@@ -73,10 +58,19 @@ $(document).ready( function() {
 	$('.bip-hours-wrapper .best_in_place').bind("ajax:success", function(xhr, data){
 		mydata = JSON.parse(data);
 		newhours = mydata.hours;
-		console.log(newhours);
-
 		hours_sum = mydata.hrs_sum;
+		user_id = mydata.user_id;
+		user_name = mydata.user_name;
+		user_sum = mydata.user_sum;
+		project_id = mydata.project_id;
+		project_name = mydata.project_name;
+		project_sum = mydata.project_sum;
+		
+		
 		$("div#entrytable_sum").html('<p class="totalrow">' + hours_sum + ' hours</p>');
+		
+		$("#filter_employees_"+user_id+"_text").html(user_name+' ('+user_sum+')');
+		$("#filter_projects_"+project_id+"_text").html(project_name+' ('+project_sum+')');
 	});
 	
 });

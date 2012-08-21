@@ -1,0 +1,13 @@
+$("#entrytable").addClass('hidden');
+$("#entrytable_sum").addClass('hidden');
+
+$("#entrycalendar").addClass('hidden');
+$("#entrycalendar_sum").addClass('hidden');
+
+$('#entrytrends').html("<%= escape_javascript( render('entries/entries_trends') )%>");
+
+$('#entrytrends').removeClass('hidden');
+
+
+
+

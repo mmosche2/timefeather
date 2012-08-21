@@ -4,7 +4,7 @@
       <th><p><%= sortable "cal_date", "Date" %></p></th>
 	    <th><p><%= sortable "name", "User" %></p></th>
       <th><p><%= sortable "project_id", "Project" %></p></th>
-      <th><p>Description</p></th>
+      <th><p><%= sortable "notes", "Description" %></p></th>
 	    <th><p><%= sortable "hours" %></p></th>
 	    <th></th>
     </tr>
@@ -20,7 +20,7 @@
 	      <td> <%= best_in_place entry, :project_id, :type => :select, :inner_class => "span2", 
 									  :collection => @editableprojects %> </td>
 	      <td> <%= best_in_place entry, :notes, :type => :textarea, :nil => "empty" %> </td>
-		  	<td> <span class="bip-hours-wrapper"><%= best_in_place entry, :hours, :inner_class => "span1",
+		  <td> <span class="bip-hours-wrapper"><%= best_in_place entry, :hours, :inner_class => "span1",
 		  	                 :path => entry_path(:id => entry.id, :shouldupdate => 1,
 									                   :myfrom => @myfrom, :myto => @myto, 
                    									 :filter_projects => @filter_projects,

@@ -59,7 +59,11 @@
       											   :filter_employees => @filter_employees), 
       					:remote => true, :id => "EntriesCalendar_btn", :class => "btn btn-info" %>
 
-              <button id="EntriesTrends_btn" class="btn btn-info">Trends</button>
+			<%= link_to "Trends", entrytrends_path(:sort => "cal_date", :direction => "desc",
+      											   :myfrom => @myfrom, :myto => @myto, 
+      											   :filter_projects => @filter_projects,
+      											   :filter_employees => @filter_employees), 
+      					:remote => true, :id => "EntriesTrends_btn", :class => "btn btn-info" %>
           
           
         </div>
@@ -80,21 +84,19 @@
         </div> <!-- filterform -->
 
         <div class="row projectlist"> 
-          <div class="span2"><!-- List Projects -->
-            <% @projects.each do |p| %>	
-  	          <label>
-  				      <%= check_box(:filter, :projects, {:multiple => true, :checked => @filter_projects.include?(p[3].to_s)}, p[3], nil)%>
-  				      <%= p[0] %> (<%= p[2] %>)
-  			      </label>
-    			    <% end %>
+          <div id="listFilterProjects" class="span2"><!-- List Projects -->
+
+
+			<%= render 'projects/filterlist' %>
+
+
           </div> <!-- List Projects -->
-          <div class="span2"><!-- List Employees -->   
-  			  	<% @employees.each do |u| %>
-            	<label>
-  				      <%= check_box(:filter, :employees, {:multiple => true, :checked => @filter_employees.include?(u[3].to_s)}, u[3], nil)%>
-  				      <%= u[0] %>  (<%= u[2] %>)
-  			      </label>
-  			    <% end %>
+          <div id="listFilterEmployees" class="span2"><!-- List Employees -->   
+  			  
+
+			<%= render 'users/filterlist' %>
+
+
           </div><!-- List Employees -->      
       </div> <!-- ProjectList Row -->
         
@@ -111,17 +113,21 @@
 	  <div class="span8 details"> <!-- Details -->
 	    
     	<div class="selectdetails">
-        <div id="entrytable_sum">
-          <p class="totalrow"><%= @hrs_sum %> hours</p>
-        </div> 
+        	<div id="entrytable_sum">
+          		<p class="totalrow"><%= @hrs_sum %> hours</p>
+        	</div> 
     		<div id="entrytable">
     			<%= render :partial => "entries/entries_table" %>
     		</div>
-    		<div id="entrycalendar_sum">
+    		<div id="entrycalendar_sum" class="hidden">
     			<p class="totalrow"><%= @cal_month_sum %> hours</p>
     		</div>
-    		<div id="entrycalendar">
+    		<div id="entrycalendar" class="hidden">
     			<%= render :partial => "entries/entries_calendar" %>
+    		</div>
+
+    		<div id="entrytrends" class="hidden">
+    			<%= render :partial => "entries/entries_trends" %>
     		</div>
     	</div><!-- selectdetails -->	    
 	    

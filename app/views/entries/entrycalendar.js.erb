@@ -1,9 +1,9 @@
-$("#entrytable").hide();
-$("#entrytable_sum").hide();
-
+$("#entrytable").addClass('hidden');
+$("#entrytable_sum").addClass('hidden');
+$('#entrytrends').addClass('hidden');
 
 $("#entrycalendar").html("<%= escape_javascript( render('entries/entries_calendar') )%>");
 $("#entrycalendar_sum").html("<p class='totalrow'><%= escape_javascript( @cal_month_sum.to_s) %> hours</p>");
 
-$("#entrycalendar").show();
-$("#entrycalendar_sum").show();
+$("#entrycalendar").removeClass('hidden');
+$("#entrycalendar_sum").removeClass('hidden');

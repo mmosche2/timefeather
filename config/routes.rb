@@ -19,6 +19,7 @@ Timefeather::Application.routes.draw do
   match '/employeestatus', :to => 'users#changestatus'
   match '/entrytable', :to => 'entries#entrytable'
   match '/entrycalendar', :to => 'entries#entrycalendar'
+  match '/entrytrends', :to => 'entries#entrytrends'
 
   match '/entries/updatejs', :to => 'entries#updatejs'
 

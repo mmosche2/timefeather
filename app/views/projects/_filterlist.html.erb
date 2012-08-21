@@ -1,0 +1,7 @@
+<% @projects.each do |p| %>	
+  <label>
+	      <%= check_box(:filter, :projects, {:multiple => true, 
+						:checked => @filter_projects.include?(p[3].to_s)}, p[3], nil)%>
+	      <span id="filter_projects_<%= p[3] %>_text"> <%= p[0] %> (<%= p[2] %>) </span>
+      </label>
+<% end %>
