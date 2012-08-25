@@ -1,8 +1,6 @@
 <div class="container mainpage">
-  
-<<<<<<< HEAD
+
 	<h2>Company: <%= @company.name %></h2>
-=======
   <div class="row"> <!-- New Entry -->  
 	  <div class="span12"><%= render :partial => "entries/form" %></div>
   </div>
@@ -40,10 +38,6 @@
       <%= form_tag root_url, :method => 'get' do %> <!-- Creates the form filter -->      
       
         <div class="row"><div class="span4"><%= submit_tag "Filter Data", :name => nil , :class => "btn span4 "%></div></div>
->>>>>>> merge with project/employee view
-
-	<br />
-             
 
         <div class="row themecolor"> 
           <div id="listFilterProjects" class="span2"><!-- List Projects -->
@@ -62,28 +56,9 @@
 				  	  </p>
 				  <% end %>
           </div><!-- List Employees -->      
-      </div> <!-- ProjectList Row -->
-
-<<<<<<< HEAD
+        </div> <!-- ProjectList Row -->
       
-=======
-      		<%= link_to "Calendar", entrycalendar_path(:sort => "cal_date", :direction => "desc",
-      											   :myfrom => @myfrom, :myto => @myto, 
-      											   :filter_projects => @filter_projects,
-      											   :filter_employees => @filter_employees), 
-      					:remote => true, :id => "EntriesCalendar_btn", :class => "offset1 btn btn-info" %>
-
-
-			<%= link_to "Trends", entrytrends_path(:sort => "cal_date", :direction => "desc",
-      											   :myfrom => @myfrom, :myto => @myto, 
-      											   :filter_projects => @filter_projects,
-      											   :filter_employees => @filter_employees), 
-      					:remote => true, :id => "EntriesTrends_btn", :class => "offset1 btn btn-info" %>
-          
-          
-        </div>
-      </div> <!-- ViewSelect -->      
-      
+      <% end %>
              
 	  <div class="span7 details"> <!-- Details -->
 
@@ -106,8 +81,6 @@
     	</div><!-- selectdetails -->	    
 	    
 	  </div> <!-- Details -->
-	
-	</div> <!-- Filter Data, Details --> 
->>>>>>> merge with project/employee view
+	</div> <!-- Filter Data, Details -->
 
 </div><!--/.container-fluid, row-->
