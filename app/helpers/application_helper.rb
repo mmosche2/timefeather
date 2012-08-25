@@ -6,7 +6,8 @@ module ApplicationHelper
     link_to title, entrytable_path(:sort => column, :direction => direction, 
                                    :myfrom => @myfrom, :myto => @myto, 
                                    :filter_projects => @filter_projects,
-                                   :filter_employees => @filter_employees), :remote => true
+                                   :filter_employees => @filter_employees,
+                                   :is_user_page => @is_user_page), :remote => true
   end
 
 

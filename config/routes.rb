@@ -22,7 +22,7 @@ Timefeather::Application.routes.draw do
   
   resources :entries
   
-  root :to => 'companies#show', id: ":id"
+  root :to => 'users#show'
   
   match '/signup', 	:to => 'companies#new'
   match '/login', 	:to => 'sessions#new'
