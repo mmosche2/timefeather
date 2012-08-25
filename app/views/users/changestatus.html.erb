@@ -1,11 +1,17 @@
-<h1>Change Status for <%= @user.name %> </h1>
+<div class="container mainpage">
+	
+	<h1>Account Status for <%= @user.name %> </h1>
+	
+	<br />
 
-<%= simple_form_for @user do |f| %>
+	<%= simple_form_for @user do |f| %>
 
-	<%= f.error_notification %>
-    <%= f.input :active, :hint => 'If checked, the user is active' %>
-	<%= f.input :end_date, :as => :string, :input_html => { :id => "UserStartDate" } %>
-	<%= f.error :base %>
-	<%= f.button :submit %>
+		<%= f.error_notification %>
+	    <%= f.input :active, :hint => 'If checked, the user is active' %>
+		<%= f.input :end_date, :as => :string, :input_html => { :id => "UserStartDate" } %>
+		<%= f.error :base %>
+		<%= f.button :submit %>
 
-<% end %>
+	<% end %>
+
+</div><!-- container, mainpage-->

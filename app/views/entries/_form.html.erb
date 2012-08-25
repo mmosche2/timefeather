@@ -15,11 +15,12 @@
 
         <div class="span2 pullright">
     	  <% if @is_user_page %>
-          <%= f.hidden_field :user_id, :value => @user.id %>
+          		<%= f.hidden_field :user_id, :value => @user.id %>
     	  <% else %>
       	    	<%= f.select :user_id, @employees, {:selected => @user.id}, {:class => "span2 clearbottommargin"} %> 
     	      	<p class="clearbottommargin">
-    				<%= link_to "+ new employee", new_user_path, :remote => true, :class => "popup_dialog smallfont" %>
+    				<%= link_to "+ staffed employees", new_relationship_path(:project => @project), 
+								:remote => true, :class => "popup_dialog smallfont" %>
     		  	</p>
     	  <% end %>
         </div>
@@ -30,7 +31,8 @@
     	  <% else %>
     			<%= f.select :project_id, @projects, {}, {:class => "span2 clearbottommargin"} %>
           		<p class="clearbottommargin">
-    				<%= link_to "+ new project", new_project_path, :remote => true, :class => "popup_dialog smallfont" %>
+    				<%= link_to "+ staffed projects", new_relationship_path(:user => @user), 
+								:remote => true, :class => "popup_dialog smallfont" %>
     			</p>
     	  <% end %>
         </div>

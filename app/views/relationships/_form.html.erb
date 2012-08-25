@@ -1,0 +1,24 @@
+<% if @project %>
+	<h3>New Staffing for <%= @project.name %></h3>
+<% else %>
+	<h3>New Staffing for <%= @user.name %></h3>
+<% end %>
+
+<br />
+
+<%= simple_form_for(@relationship) do |f| %>
+	<% if @project %>
+		<%= f.hidden_field :project_id, :value => @project.id %>
+		<%= f.association :user, :collection => @notstaffed_employees, :selected => @notstaffed_employees.first  %>
+	<% else %>
+		<%= f.hidden_field :user_id, :value => @user.id %>
+		<%= f.association :project, :collection => @notstaffed_projects, :selected => @notstaffed_projects.first  %>
+	<% end %>
+	<%= f.input :rate %>
+	<!-- <%= f.input :staffing_start, :as => :string,
+	 			:input_html => { :id => "StaffingStartDate" } %>
+	<%= f.input :staffing_end, :as => :string,
+				 			:input_html => { :id => "StaffingEndDate" } %> -->
+	<%= f.input :budgeted_hrs, :label => 'Budgeted Hours' %>
+  	<%= f.submit "Add to Staff", :class => 'btn btn-large btn-primary' %>
+<% end %>

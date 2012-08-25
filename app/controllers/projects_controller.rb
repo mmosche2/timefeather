@@ -7,7 +7,7 @@ class ProjectsController < ApplicationController
   def create
     @project = Project.new(params[:project])
     if @project.save
-      redirect_to root_url
+      redirect_to overview_path
     else
       render "new"
     end

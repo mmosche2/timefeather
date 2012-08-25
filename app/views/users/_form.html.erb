@@ -1,14 +1,12 @@
 <%= simple_form_for @user do |f| %>
 
-<h1>Company = <%= @company.name %></h1>
-
 	<%= f.error_notification %>
 	<%= f.input :name %>
     <%= f.input :email %>
-<% if @type == "edit" %>
-	<%= f.input :start_date, :as => :string,
-	 			:input_html => { :id => "UserStartDate", :value => @startdate } %>
-<% end %>
+	<% if @type == "edit" %>
+		<%= f.input :start_date, :as => :string,
+		 			:input_html => { :id => "UserStartDate", :value => @startdate } %>
+	<% end %>
     <%= f.input :password %>
     <%= f.input :password_confirmation %>
   	<%= f.hidden_field :company_id, :value => @company.id %>

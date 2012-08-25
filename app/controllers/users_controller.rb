@@ -21,7 +21,7 @@ class UsersController < ApplicationController
         cookies[:auth_token] = @user.auth_token
       end
       
-      redirect_to root_url
+      redirect_to overview_path
     else
       @company = Company.find(params[:user][:company_id])
       render "new"

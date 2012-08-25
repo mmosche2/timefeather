@@ -1,5 +1,13 @@
-<h1>Update Employees</h1>
+<div class="container mainpage">
+	<h1>Account for <%= @user.name %></h1>
+	<br />
+	<%= render 'form' %>
 
-<%= render 'form' %>
+	<br />
 
-<%= link_to "Change Employee Status", employeestatus_path %>
+	<div>
+		<%= link_to "Change Employee Status", employeestatus_path %>
+	</div>
+
+</div><!-- container, mainpage-->
+

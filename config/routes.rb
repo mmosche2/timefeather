@@ -4,7 +4,7 @@ Timefeather::Application.routes.draw do
   get "password_resets/new"
 
   resources :sessions, :only => [:new, :create, :destroy]
-  resources :relationships, only: [:create, :update, :destroy]
+  resources :relationships
   resources :password_resets
   resources :companies
     
@@ -32,6 +32,7 @@ Timefeather::Application.routes.draw do
   match '/entrytable', :to => 'entries#entrytable'
   match '/entrycalendar', :to => 'entries#entrycalendar'
   match '/entrytrends', :to => 'entries#entrytrends'
+  match '/overview', :to => 'companies#show', :id => "id"
 
   match '/entries/updatejs', :to => 'entries#updatejs'
 

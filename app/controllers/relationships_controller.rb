@@ -1,24 +1,42 @@
 class RelationshipsController < ApplicationController
   before_filter :authorize
   
+  def new
+    @relationship = Relationship.new
+    @company = my_company
+    @project = params[:project] ? Project.find(params[:project]) : nil
+    @user = params[:user] ? User.find(params[:user]) : nil
+    if (@project)
+      @staffed_employees = @project.staffed_users
+      @notstaffed_employees = @company.users - @staffed_employees
+      @notstaffed_employees.map{|u|[u.name, u.id]}
+    else
+      @staffed_projects = @user.staffed_projects
+      @notstaffed_projects = @company.projects - @staffed_projects
+      @notstaffed_projects.map{|p|[p.name, p.id]}
+    end
+  end
+  
+  
   def create
-    @project = Project.find(params[:relationship][:project_id])
-    
-    # BELOW CAN PROBABLY BE DELETED
-    # @user = User.find(params[:relationship][:user_id])
-    # @rate = params[:relationship][:rate]
-    # @staffingstart = params[:relationship][:staffing_start]
-    # @staffingend = params[:relationship][:staffing_end]
-    # @budgeted_hrs = params[:relationship][:budgeted_hrs]
-    # @user.staff!(@project, @rate, @staffingstart, @staffingend, @budgeted_hrs)
+    @relationship_params = params[:relationship]
 
-    @relationship = Relationship.new(params[:relationship])
+    @project = @relationship_params[:project_id] ? Project.find(params[:relationship][:project_id]) : nil
+    @user = @relationship_params[:user_id] ? User.find(params[:relationship][:user_id]) : nil
+    
+    if @relationship_params.first[0] == "user_id"
+      @myredirect = @user
+    else
+      @myredirect = @project
+    end
+    
+    @relationship = Relationship.new(@relationship_params)
     respond_to do |format|
       if @relationship.save 
-          format.html { redirect_to @project }
+          format.html { redirect_to @myredirect }
           format.js
       else 
-          format.html { redirect_to @project }
+          format.html { @project ? (redirect_to @project) : (redirect_to @user) }
           format.js
       end
     end    
@@ -56,5 +74,6 @@ class RelationshipsController < ApplicationController
   
   
   
+
   
 end

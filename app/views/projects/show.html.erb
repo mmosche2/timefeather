@@ -1,7 +1,7 @@
 <div class="container mainpage">  
   
   <div class="row"> <!-- New Entry -->  
-	  <div class="span12"><%= render :partial => "entries/form" %></div>
+	  <div class="span12 new_entry_form_box"><%= render :partial => "entries/form" %></div>
   </div>
 
   
@@ -49,7 +49,7 @@
       											   :myfrom => @myfrom, :myto => @myto, 
       											   :filter_projects => @filter_projects,
       											   :filter_employees => @filter_employees, 
-												   :is_user_page => true), 
+												   :is_user_page => false), 
       					:remote => true, :id => "EntriesTable_btn", :class => "btn btn-info" %>
 
       		<%= link_to "Calendar", entrycalendar_path(:sort => "cal_date", :direction => "desc",
@@ -95,22 +95,7 @@
 	</div> <!-- Filter Data, Details -->
     
 	<div class="span7">
-		<!-- ADD EMPLOYEE TO PROJECT -->
-		<p id="StaffEmployeeForm_btn" class="btn">Add Employee to Project</p>
-		<div id="StaffEmployeeForm">
-			<!-- Is there any affect when using current_user here? -->
-			<%= simple_form_for(@relationship) do |f| %>
-				<%= f.hidden_field :project_id, :value => @project.id %>
-				<%= f.association :user, :collection => @notstaffed_employees, :selected => @notstaffed_employees.first  %>
-				<%= f.input :rate %>
-				<%= f.input :staffing_start, :as => :string,
-				 			:input_html => { :id => "StaffingStartDate" } %>
-				<%= f.input :staffing_end, :as => :string,
-							 			:input_html => { :id => "StaffingEndDate" } %>
-				<%= f.input :budgeted_hrs, :label => 'Budgeted Hours' %>
-			  	<%= f.submit "Add to Staff", :class => 'btn btn-large btn-primary' %>
-			<% end %>
-		</div>
+
 		<!-- LIST STAFFED EMPLOYEES -->
 		<h2 id="ProjectStaffCount">Staff - <%= @staff.count %> </h2>
 		<table class="table table-bordered table-condensed">
@@ -118,8 +103,8 @@
 		    <tr>	
 		      	<th><p>Employee</p></th>
 			    <th><p>Rate</p></th>
-		      	<th><p>Start Date</p></th>
-		      	<th><p>End Date</p></th>
+		      	<!-- <th><p>Start Date</p></th>
+		      	<th><p>End Date</p></th> -->
 			    <th><p>Budgeted Hours</p></th>
 			    <th><p>Actual Hours</p></th>
 			    <th></th>
@@ -131,8 +116,8 @@
 									
 		      	<td> <%= s.user.name %></td>
 		      	<td> <%= best_in_place s, :rate %></td>
-			    <td> <%= best_in_place s, :staffing_start, :type => :date %></td>
-			    <td> <%= best_in_place s, :staffing_end, :type => :date %></td>
+			    <!-- <td> <%= best_in_place s, :staffing_start, :type => :date %></td>
+			    <td> <%= best_in_place s, :staffing_end, :type => :date %></td> -->
 				<td> <%= best_in_place s, :budgeted_hrs %></td>
 				<td> <%= (hr_sum = @user_entries.find{|e| e.user_id == s.user_id}) ? hr_sum.hours_sum : 0 %></td>
 				<td>

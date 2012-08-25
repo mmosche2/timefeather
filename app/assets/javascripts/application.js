@@ -75,16 +75,17 @@ $(document).ready( function() {
 		$("#filter_projects_"+project_id+"_text").html(project_name+' ('+project_sum+')');
 	});
 	
-	staffFormButton = $('#StaffEmployeeForm_btn')
-	staffFormButton.click(function(){
-		staffFormBox = $('#StaffEmployeeForm');
-		if( staffFormBox.is(":hidden")){
-			staffFormBox.slideDown("slow");
-			staffFormButton.html('Hide Add Staff Box');
-		} else {
-			staffFormBox.slideUp("slow");
-			staffFormButton.html('Add Employee to Project');
-		}
-	});
+	// /////////// NOT USED ANYMORE ///////////
+	// staffFormButton = $('#StaffEmployeeForm_btn')
+	// staffFormButton.click(function(){
+	// 	staffFormBox = $('#StaffEmployeeForm');
+	// 	if( staffFormBox.is(":hidden")){
+	// 		staffFormBox.slideDown("slow");
+	// 		staffFormButton.html('Hide Add Staff Box');
+	// 	} else {
+	// 		staffFormBox.slideUp("slow");
+	// 		staffFormButton.html('Add Employee to Project');
+	// 	}
+	// });
 	
 });

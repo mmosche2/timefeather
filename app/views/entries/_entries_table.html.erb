@@ -2,7 +2,7 @@
   <thead>
     <tr>	
       	<th><p><%= sortable "cal_date", "Date" %></p></th>
-	    <% if !@is_user_page %>
+	    <% if @is_user_page.to_s == "false" %>
 			<th><p><%= sortable "name", "User" %></p></th>
       	<% else %>
 			<th><p><%= sortable "project_id", "Project" %></p></th>
@@ -17,7 +17,7 @@
     <tr>
       	<td> <%= best_in_place entry, :cal_date, :type => :date, :display_as => :mdmy_format, :inner_class => "span2 mdmy_format" %> </td>
 
-		<% if !@is_user_page %>
+		<% if @is_user_page.to_s == "false" %>
       		<td> <%= best_in_place entry, :user_id, :type => :select, :inner_class => "span2",
 									  :collection => @editableemployees %> 
 			</td>
@@ -44,6 +44,15 @@
     </tr>
 
 	<% end %>
+	
+	<!-- TOTAL HOURS ROW -->
+	<tr>	
+      	<th></th>
+		<th></th>
+      	<th></th>
+	    <th><p><%= @hrs_sum %></p></th>
+	    <th></th>
+    </tr>
   </tbody>
 </table>
     
