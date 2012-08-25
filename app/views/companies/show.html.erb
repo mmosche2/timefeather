@@ -1,86 +1,29 @@
 <div class="container mainpage">
+ 
+     <h2>Company: <%= @company.name %></h2>
 
-	<h2>Company: <%= @company.name %></h2>
-  <div class="row"> <!-- New Entry -->  
-	  <div class="span12"><%= render :partial => "entries/form" %></div>
-  </div>
-  
-  <div class="row">
-  
-    <div class="span4">
-      
-      <div class="row"><div class="span4 feedbackbox"><div class="row"><div class="offsethalf span3 feedback">
-        <fieldset>
-          <legend><username><%= @user.name %></legend>
-          <div class="row statusbar">
-            <div class="spanhalf"><p>Week</p></div>
-            <div class="span2 progress progress-striped progress-warning tips" 
-                  title="<%= @my_week_sum %>/<%= @workhours_week %>"><div class="bar" 
-                  style="width: <%= @utilization_week %>;"><p><%= @utilization_week %></p></div></div>
-          </div>
-          <div class="row statusbar">
-            <div class="spanhalf"><p>Month</p></div>
-            <div class="span2 progress progress-striped progress-warning tips" 
-                  title="<%= @my_month_sum %>/<%= @workhours_month %>"><div class="bar" 
-                  style="width: <%= @utilization_month %>;"><p><%= @utilization_month %></p></div></div>
-          </div>
-          <div class="row statusbar">
-            <div class="spanhalf"><p>Year</p></div>
-            <div class="span2 progress progress-striped progress-warning tips" 
-                  title="<%= @my_year_sum %>/<%= @workhours_year %>"><div class="bar" 
-                  style="width: <%= @utilization_year %>;"><p><%= @utilization_year %></p></div></div>
-          </div>
-        </fieldset>
-      </div></div></div></div> <!-- Feedback-->
-      
-      
-      <div class="row"><div class="span4 formfilter">
-      <%= form_tag root_url, :method => 'get' do %> <!-- Creates the form filter -->      
-      
-        <div class="row"><div class="span4"><%= submit_tag "Filter Data", :name => nil , :class => "btn span4 "%></div></div>
+     <br />
+            
 
-        <div class="row themecolor"> 
+        <div class="row themecolor">
           <div id="listFilterProjects" class="span2"><!-- List Projects -->
-				  <h3>All Projects</h3>
-			      <% @projects.each do |p| %>
-					  <p> 
-						<%= link_to p[0], project_path(p[3]) %>  (<%= p[2] %>)
-				  	  </p>
-				  <% end %>
+                      <h3>All Projects</h3>
+                     <% @projects.each do |p| %>
+                           <p>
+                              <%= link_to p[0], project_path(p[3]) %>  (<%= p[2] %>)
+                             </p>
+                      <% end %>
           </div> <!-- List Projects -->
-          <div id="listFilterEmployees" class="span2"><!-- List Employees -->   
-				  <h3>All Employees</h3>
-			      <% @employees.each do |u| %>
-					  <p> 
-						<%= link_to u[0], user_path(u[3]) %>  (<%= u[2] %>)
-				  	  </p>
-				  <% end %>
-          </div><!-- List Employees -->      
-        </div> <!-- ProjectList Row -->
-      
-      <% end %>
-             
-	  <div class="span7 details"> <!-- Details -->
+          <div id="listFilterEmployees" class="span2"><!-- List Employees -->  
+                      <h3>All Employees</h3>
+                     <% @employees.each do |u| %>
+                           <p>
+                              <%= link_to u[0], user_path(u[3]) %>  (<%= u[2] %>)
+                             </p>
+                      <% end %>
+          </div><!-- List Employees -->     
+      </div> <!-- ProjectList Row -->
 
-      <div class="selectdetails">
-    	  <div id="entrytable_sum">
-            <p class="totalrow"><%= @hrs_sum %> hours</p>
-        </div>
-    		<div id="entrytable">
-    			<%= render :partial => "entries/entries_table" %>
-    		</div>
-    		<div id="entrycalendar_sum" class="hidden">
-    			<p class="totalrow"><%= @cal_month_sum %> hours</p>
-    		</div>
-    		<div id="entrycalendar" class="hidden">
-    			<%= render :partial => "entries/entries_calendar" %>
-    		</div>
-    		<div id="entrytrends" class="hidden">
-    			<%= render :partial => "entries/entries_trends" %>
-    		</div>
-    	</div><!-- selectdetails -->	    
-	    
-	  </div> <!-- Details -->
-	</div> <!-- Filter Data, Details -->
+     
 
-</div><!--/.container-fluid, row-->
+</div><!-- container, mainpage-->

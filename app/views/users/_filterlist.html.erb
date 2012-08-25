@@ -1,11 +1,6 @@
 <% @employees.each do |u| %>
 	<label>
-	      <%= check_box(:filter, :employees, {:multiple => true, 
-						:checked => @filter_employees.include?(u[3].to_s)}, u[3], nil)%>
-<<<<<<< HEAD
-	      <span id="filter_employees_<%= u[3] %>_text"> <%= link_to u[0], user_path(u[3]) %>  (<%= u[2] %>) </span>
-=======
-	      <span class="tips" id="filter_employees_<%= u[3] %>_text" title="<%= u[2] %> total hours"> <%= u[0] %> </span>
->>>>>>> merge with project/employee view
-    </label>
-  <% end %>
+	  <%= check_box(:filter, :employees, {:multiple => true, :checked => @filter_employees.include?(u[3].to_s)}, u[3], nil)%>
+	  <span class="tips" id="filter_employees_<%= u[3] %>_text" title="<%= u[2] %> total hours"> <%= link_to u[0], user_path(u[3]) %> </span>
+  </label>
+<% end %>
