@@ -17,6 +17,7 @@
     <tr>
       	<td> <%= best_in_place entry, :cal_date, :type => :date, 
 									  :display_as => :mdmy_format,
+<<<<<<< HEAD
 									  :inner_class => "span2 mdmy_format" %> 
 		</td>
 		<% if !@is_user_page %>
@@ -32,6 +33,15 @@
 		</td>
 		
 		<td> <span class="bip-hours-wrapper"><%= best_in_place entry, :hours, :inner_class => "span1",
+=======
+									  :inner_class => "span2 mdmy_format" %> </td>
+      	<td> <%= best_in_place entry, :user_id, :type => :select, :inner_class => "span2",
+									  :collection => @editableemployees %> </td>
+	      <td> <%= best_in_place entry, :project_id, :type => :select, :inner_class => "span2", 
+									  :collection => @editableprojects %> </td>
+	      <td> <%= best_in_place entry, :notes, :type => :textarea, :nil => "empty" %> </td>
+		    <td> <span class="bip-hours-wrapper"><%= best_in_place entry, :hours, :inner_class => "span1",
+>>>>>>> merge with project/employee view
 		  	                 :path => entry_path(:id => entry.id, :shouldupdate => 1,
 							 :myfrom => @myfrom, :myto => @myto, 
                    			 :filter_projects => @filter_projects,
@@ -39,11 +49,18 @@
 	 						 :data => {:entry_hours => entry.user_id} %></span> 
 		</td>
         
+<<<<<<< HEAD
 		<td> <%= link_to(entry, confirm: 'Are you sure?', method: :delete, 
 					         :class => "tips", :title => "Delete Entry") do %>
 					<i class="icon-remove"></i>
 			 <% end %>
 		</td>
+=======
+		  	<td>
+		    	
+		    	   <%= link_to(entry, confirm: 'Are you sure?', method: :delete, 
+					          :class => "tips", :title => "Delete Entry") do %><i class="icon-remove"></i><% end %></td>
+>>>>>>> merge with project/employee view
     </tr>
 
 	<% end %>
