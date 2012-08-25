@@ -3,6 +3,10 @@ class Project < ActiveRecord::Base
   
   belongs_to :company
   has_many :entries
+  has_many :reverse_relationships,
+					 :class_name => "Relationship",
+					 :dependent => :destroy
+	has_many :staffed_users, :through => :reverse_relationships, :source => :user
   
   validates :name, :presence => true
   validates_numericality_of :budgeted_hrs, :message => 'Please input a number'

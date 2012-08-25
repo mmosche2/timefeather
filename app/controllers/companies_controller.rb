@@ -88,7 +88,7 @@ class CompaniesController < ApplicationController
   	
   	
   	# PULL CALENDAR ENTRIES
-  	@date = @date = params[:date] ? Date.parse(params[:date]) : Date.today
+  	@date = params[:date] ? Date.parse(params[:date]) : Date.today
   	@calendar_entries = @entries.where("cal_date >= ? AND cal_date <= ?", 
   	                                           @date.beginning_of_month, @date.end_of_month)
                                                

@@ -73,14 +73,11 @@
       <%= form_tag root_url, :method => 'get' do %> <!-- Creates the form filter -->
       <div class="filterdata">
       
-        <form></form> <!-- Do not remove or formatting of below is broken -->
         <div class="filterform">
-          <form class="form-inline">
             <label for="startdate">From</label>
   			    <%= text_field(:from, '', :value => @myfrom.strftime('%h %-d %Y'), :class => "span1", :id => "startdate") %>
             <label for="enddate">To</label>
   	  		  <%= text_field(:to, '', :value => @myto.strftime('%h %-d %Y'), :class => "span1", :id => "enddate") %>
-          </form>
         </div> <!-- filterform -->
 
         <div class="row projectlist"> 

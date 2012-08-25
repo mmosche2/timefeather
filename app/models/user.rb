@@ -4,6 +4,8 @@ class User < ActiveRecord::Base
   
   belongs_to :company
   has_many :entries
+  has_many :relationships, :dependent => :destroy
+  has_many :staffed_projects, :through => :relationships, :source => :project
   
   validates :email,
 				:presence 	=> true,
@@ -14,6 +16,21 @@ class User < ActiveRecord::Base
 	validates_presence_of :password_confirmation, :on => :create
 	
 	before_create { generate_token(:auth_token) }
+  
+  
+  
+  def staffed?(project)
+    relationships.find_by_project_id(project.id)
+  end
+
+  def staff!(project, rate, staffingstart, staffingend, budgeted_hrs)
+    relationships.create!(project_id: project.id, rate: rate, staffing_start: staffingstart, staffing_end: staffingend,
+                          budgeted_hrs: budgeted_hrs)
+  end
+
+  def unstaff!(project)
+    relationships.find_by_project_id(project.id).destroy
+  end
   
   
 	def generate_token(column)

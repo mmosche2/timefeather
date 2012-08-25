@@ -29,7 +29,9 @@ $(document).ready( function() {
 	$('#enddate').datepicker({ dateFormat: "M d yy"});
 	$('#newentry_caldate').datepicker();
 	$('#UserStartDate').datepicker();
-	
+	$('#StaffingStartDate').datepicker();
+	$('#StaffingEndDate').datepicker();
+		
 	$('.best_in_place').best_in_place();	
 	
 	var $dialog = $('<div id="popup_dialog_box"></div>')
@@ -71,6 +73,18 @@ $(document).ready( function() {
 		
 		$("#filter_employees_"+user_id+"_text").html(user_name+' ('+user_sum+')');
 		$("#filter_projects_"+project_id+"_text").html(project_name+' ('+project_sum+')');
+	});
+	
+	staffFormButton = $('#StaffEmployeeForm_btn')
+	staffFormButton.click(function(){
+		staffFormBox = $('#StaffEmployeeForm');
+		if( staffFormBox.is(":hidden")){
+			staffFormBox.slideDown("slow");
+			staffFormButton.html('Hide Add Staff Box');
+		} else {
+			staffFormBox.slideUp("slow");
+			staffFormButton.html('Add Employee to Project');
+		}
 	});
 	
 });

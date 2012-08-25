@@ -4,12 +4,24 @@ Timefeather::Application.routes.draw do
   get "password_resets/new"
 
   resources :sessions, :only => [:new, :create, :destroy]
+  resources :relationships, only: [:create, :update, :destroy]
   resources :password_resets
-  resources :users
   resources :companies
-  resources :projects
-  resources :entries
+    
+  resources :users do
+    member do
+      get :staffed_projects
+    end
+  end
 
+  resources :projects do
+    member do
+      get :staffed_users
+    end
+  end
+  
+  resources :entries
+  
   root :to => 'companies#show', id: ":id"
   
   match '/signup', 	:to => 'companies#new'
