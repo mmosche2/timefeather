@@ -2,6 +2,6 @@
 	<label>
 	      <%= check_box(:filter, :employees, {:multiple => true, 
 						:checked => @filter_employees.include?(u[3].to_s)}, u[3], nil)%>
-	      <span id="filter_employees_<%= u[3] %>_text"> <%= u[0] %>  (<%= u[2] %>) </span>
+	      <span id="filter_employees_<%= u[3] %>_text"> <%= link_to u[0], user_path(u[3]) %>  (<%= u[2] %>) </span>
     </label>
   <% end %>
