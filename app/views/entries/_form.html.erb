@@ -1,51 +1,59 @@
+<div>
+  
+  <fieldset>
+    <legend>      
+      <% if @is_user_page %>
+    			<%= @user.name %> - New Entry
+    	<% else %>
+      	  <%= @project.name %> - New Entry	
+    	<% end %>
+    </legend>
 
-<div class="newentry">
-  
-  <%= form_for(@entry, :class => "form-inline clearbottommargin") do |f| %>
+    <%= form_for(@entry, :class => "form-inline clearbottommargin") do |f| %>
 
-  <div class="row">
-  
-    <div class="span2 pullright">
-	  <% if @is_user_page %>
-			<span class="span2"><%= @user.name %></span>
-			<%= f.hidden_field :user_id, :value => @user.id %>
-	  <% else %>
-  	    	<%= f.select :user_id, @employees, {:selected => @user.id}, {:class => "span2 clearbottommargin"} %> 
-	      	<p class="clearbottommargin">
-				<%= link_to "+ new employee", new_user_path, :remote => true, :class => "popup_dialog smallfont" %>
-		  	</p>
-	  <% end %>
-    </div>
-  
-    <div class="span2 pullright">
-	  <% if !@is_user_page %>
-      		<span class="span2"><%= @project.name %></span>
-			<%= f.hidden_field :project_id, :value => @project.id %>
-	  <% else %>
-			<%= f.select :project_id, @projects, {}, {:class => "span2 clearbottommargin"} %>
-      		<p class="clearbottommargin">
-				<%= link_to "+ new project", new_project_path, :remote => true, :class => "popup_dialog smallfont" %>
-			</p>
-	  <% end %>
-    </div>
-  
-    <div class="spanonefive">
-      <%= f.text_field :cal_date, { :class => "datedropdown", :id =>"newentry_caldate", :value => @today.to_s(:dmdy) } %>
-    </div>
-  
-    <div class="span1">
-      <%= f.text_field :hours, { :class => "span1", :placeholder => "hours" } %>
-    </div>
+      <div class="row">
 
-    <div class="span4">
-      <%= f.text_area :notes, { :class => "span4 clearbottommargin", :placeholder => "note", :rows => 1 } %>
-    </div>
-    <div class="span1">
-     <%= f.submit "Add Entry", :class => "btn btn-warning clearbottommargin" %>
-    </div>  
-  </div> <!-- row -->
-  
- <% end %>
+        <div class="span2 pullright">
+    	  <% if @is_user_page %>
+          <%= f.hidden_field :user_id, :value => @user.id %>
+    	  <% else %>
+      	    	<%= f.select :user_id, @employees, {:selected => @user.id}, {:class => "span2 clearbottommargin"} %> 
+    	      	<p class="clearbottommargin">
+    				<%= link_to "+ new employee", new_user_path, :remote => true, :class => "popup_dialog smallfont" %>
+    		  	</p>
+    	  <% end %>
+        </div>
+
+        <div class="span2 pullright">
+    	  <% if !@is_user_page %>
+    			<%= f.hidden_field :project_id, :value => @project.id %>
+    	  <% else %>
+    			<%= f.select :project_id, @projects, {}, {:class => "span2 clearbottommargin"} %>
+          		<p class="clearbottommargin">
+    				<%= link_to "+ new project", new_project_path, :remote => true, :class => "popup_dialog smallfont" %>
+    			</p>
+    	  <% end %>
+        </div>
+
+        <div class="spanonefive">
+          <%= f.text_field :cal_date, { :class => "datedropdown", :id =>"newentry_caldate", :value => @today.to_s(:dmdy) } %>
+        </div>
+
+        <div class="span1">
+          <%= f.text_field :hours, { :class => "span1", :placeholder => "hours" } %>
+        </div>
+
+        <div class="span6">
+          <%= f.text_area :notes, { :class => "span6 clearbottommargin", :placeholder => "note", :rows => 1 } %>
+        </div>
+        <div class="span1">
+         <%= f.submit "Add Entry", :class => "btn btn-warning clearbottommargin" %>
+        </div>  
+      </div> <!-- row -->
+
+     <% end %>
+
+  </fieldset>
   
 </div>
 

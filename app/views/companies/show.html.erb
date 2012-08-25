@@ -1,29 +1,29 @@
 <div class="container mainpage">
- 
-     <h2>Company: <%= @company.name %></h2>
 
-     <br />
-            
+  <h2><%= @company.name %></h2>
 
-        <div class="row themecolor">
-          <div id="listFilterProjects" class="span2"><!-- List Projects -->
-                      <h3>All Projects</h3>
-                     <% @projects.each do |p| %>
-                           <p>
-                              <%= link_to p[0], project_path(p[3]) %>  (<%= p[2] %>)
-                             </p>
-                      <% end %>
-          </div> <!-- List Projects -->
-          <div id="listFilterEmployees" class="span2"><!-- List Employees -->  
-                      <h3>All Employees</h3>
-                     <% @employees.each do |u| %>
-                           <p>
-                              <%= link_to u[0], user_path(u[3]) %>  (<%= u[2] %>)
-                             </p>
-                      <% end %>
-          </div><!-- List Employees -->     
-      </div> <!-- ProjectList Row -->
+  <br />    
 
-     
+  <div class="row">
+    <h3 class="offset1 span4" style="text-align: center; text-decoration: underline">All Projects</h3>
+    <h3 class="offset1 span4" style="text-align: center; text-decoration: underline">All Employees</h3>
+  </div>
+
+
+
+  <div class="row themecolor">
+    <div id="listFilterProjects" class="offset1 span5"><!-- List Projects -->  
+        <% @projects.each do |p| %>
+          <div class="span2"><p class="tips" title="<%= p[2] %> total hours"><%= link_to p[0], project_path(p[3]) %></p></div>          
+        <% end %>
+    </div> <!-- List Projects -->
+
+    <div id="listFilterEmployees" class="span5"><!-- List Employees -->  
+        <% @employees.each do |u| %>
+          <p class="span2 tips" title="<%= u[2] %> total hours"><%= link_to u[0], user_path(u[3]) %></p>
+        <% end %>
+    </div><!-- List Employees -->     
+
+  </div>
 
 </div><!-- container, mainpage-->

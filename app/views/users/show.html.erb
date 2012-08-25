@@ -1,18 +1,85 @@
-<div class="container mainpage">
-  
+<div class="container mainpage">  
   
   <div class="row"> <!-- New Entry -->  
 	  <div class="span12"><%= render :partial => "entries/form" %></div>
   </div>
   
+  <div class="row"> <!-- Data Table, Feedback, Filter Data -->
+    
+    <%= form_tag root_url, :method => 'get' do %> <!-- Creates the form filter -->        
+    
+    
+    <div class="span2 projectlist">
+      <div class="row" id="listFilterProjects"><!-- List Projects -->
+			  <p class="titleitem span2">My Projects</p>
+	      <%= render 'projects/filterlist' %>
+      </div>    
+    <div class="row"><div class="span2"><%= submit_tag "Filter Data", :name => nil , :class => "btn span2 "%></div></div>  
+    </div> <!-- Project List -->
+    
+    
+
+
+    <div class="span9 datatable">
+
+      <div class="viewselect">
+        <div data-toggle="buttons-radio">
+
+          <%= link_to entrytable_path(:sort => "cal_date", :direction => "desc", :myfrom => @myfrom, :myto => @myto, 
+        			:filter_projects => @filter_projects, :filter_employees => @filter_employees, :is_user_page => true), 
+        			:remote => true, :id => "EntriesTable_btn", :class => "buttonleft btn btn-info" do %>
+        	    <i class="icon-th icon-white"></i> Entries	  
+        	<% end %>
+          <br />
+        	<%= link_to entrycalendar_path(:sort => "cal_date", :direction => "desc", :myfrom => @myfrom, :myto => @myto, 
+					    :filter_projects => @filter_projects, :filter_employees => @filter_employees), 
+        		  :remote => true, :id => "EntriesCalendar_btn", :class => "buttonleft btn btn-info" do %>
+              <i class="icon-calendar icon-white"></i> Calendar
+          <% end %>        		  
+          <br />
+  			  <%= link_to entrytrends_path(:sort => "cal_date", :direction => "desc", :myfrom => @myfrom, :myto => @myto, 
+					    :filter_projects => @filter_projects, :filter_employees => @filter_employees), 
+  					  :remote => true, :id => "EntriesTrends_btn", :class => "buttonleft btn btn-info" do %>
+              <i class="icon-signal icon-white"></i> Trends
+          <% end %>
+        </div>
+      </div> <!-- ViewSelect -->      
   
-  <div class="row">
-  
-    <div class="span4">
+  	  <div class="viewdetails"> <!-- View Details -->
+        <div class="selectdetails">
+      	  
+      	  <div class="span3">
+            From: <%= text_field(:from, '', :value => @myfrom.strftime('%h %-d %Y'), :class => "span1", :id => "startdate") %>
+  			    To: <%= text_field(:to, '', :value => @myto.strftime('%h %-d %Y'), :class => "span1", :id => "enddate") %>
+        	</div></div> <!-- filterform -->
+        	<div class="span2"><%= submit_tag "Filter Data", :name => nil , :class => "btn span2 "%></div>
+      	  <div id="entrytable_sum" style="margin-bottom: 20px">
+            <p class="totalrow"><%= @hrs_sum %> hours</p>
+          </div>
+          
+          <div id="entrytable">
+      		  <%= render :partial => "entries/entries_table" %>
+      		</div>
+      		<div id="entrycalendar_sum" class="hidden">
+      			<p class="totalrow"><%= @cal_month_sum %> hours</p>
+      		</div>
+      		<div id="entrycalendar" class="hidden">
+      			<%= render :partial => "entries/entries_calendar" %>
+      		</div>
+      		<div id="entrytrends" class="hidden">
+      			<%= render :partial => "entries/entries_trends" %>
+      		</div>
+      	</div><!-- selectdetails -->	    
+  	  </div> <!-- View Details -->
+    
+    </div>
+    
+    <% end %>      
       
-      <div class="row"><div class="span4 feedbackbox"><div class="offsethalf span3 feedback">
+          
+      <!-- <div class="row"><div class="span3 borderleft utilization">
         <fieldset>
-          <legend><username><%= @user.name %></legend>
+          <legend><%= @user.name %> - Utilization</legend>
           <div class="row statusbar">
             <div class="spanhalf"><p>Week</p></div>
             <div class="span2 progress progress-striped progress-warning tips" 
@@ -32,87 +99,11 @@
                   style="width: <%= @utilization_year %>;"><p><%= @utilization_year %></p></div></div>
           </div>
         </fieldset>
-      </div></div></div> <!-- Feedback-->
-      
-      
-      <div class="row"><div class="span4 formfilter">
-      <%= form_tag root_url, :method => 'get' do %> <!-- Creates the form filter -->      
-      
-        <div class="row"><div class="span4"><%= submit_tag "Filter Data", :name => nil , :class => "btn span4 "%></div></div>
-
-        <div class="row"><div class="span4 displayinline">
-          <label for="startdate">From</label>
-			    <%= text_field(:from, '', :value => @myfrom.strftime('%h %-d %Y'), :class => "span1", :id => "startdate") %>
-          <label for="enddate">To</label>
-	  		  <%= text_field(:to, '', :value => @myto.strftime('%h %-d %Y'), :class => "span1", :id => "enddate") %>
-      	</div></div> <!-- filterform -->
-       
-
-        <div class="row themecolor"> 
-          <div id="listFilterProjects" class="span2"><!-- List Projects -->
-				<p>Projects I am staffed to</p>
-			      <%= render 'projects/filterlist' %>
-          </div> <!-- List Projects -->    
-      	</div> <!-- ProjectList Row -->
+      </div></div> -->
       
 
-      <% end %>
-      </div></div>
-    
-    </div>  
-      
-    <div class="span7 datatable">
-    
-      <div class="viewselect span7">
-        <div data-toggle="buttons-radio">
-
-          <%= link_to "Entries", entrytable_path(:sort => "cal_date", :direction => "desc",
-      											   :myfrom => @myfrom, :myto => @myto, 
-      											   :filter_projects => @filter_projects,
-      											   :filter_employees => @filter_employees, 
-												   :is_user_page => true), 
-      					:remote => true, :id => "EntriesTable_btn", :class => "btn btn-info" %>
-
-      		<%= link_to "Calendar", entrycalendar_path(:sort => "cal_date", :direction => "desc",
-      											   :myfrom => @myfrom, :myto => @myto, 
-      											   :filter_projects => @filter_projects,
-      											   :filter_employees => @filter_employees), 
-      					:remote => true, :id => "EntriesCalendar_btn", :class => "offset1 btn btn-info" %>
-
-
-			<%= link_to "Trends", entrytrends_path(:sort => "cal_date", :direction => "desc",
-      											   :myfrom => @myfrom, :myto => @myto, 
-      											   :filter_projects => @filter_projects,
-      											   :filter_employees => @filter_employees), 
-      					:remote => true, :id => "EntriesTrends_btn", :class => "btn btn-info" %>
-          
-          
-        </div>
-      </div> <!-- ViewSelect -->      
-      
-             
-	  <div class="span8 details"> <!-- Details -->
-
-      <div class="selectdetails">
-    	  <div id="entrytable_sum">
-            <p class="totalrow"><%= @hrs_sum %> hours</p>
-        </div>
-    		<div id="entrytable">
-    			<%= render :partial => "entries/entries_table" %>
-    		</div>
-    		<div id="entrycalendar_sum" class="hidden">
-    			<p class="totalrow"><%= @cal_month_sum %> hours</p>
-    		</div>
-    		<div id="entrycalendar" class="hidden">
-    			<%= render :partial => "entries/entries_calendar" %>
-    		</div>
-    		<div id="entrytrends" class="hidden">
-    			<%= render :partial => "entries/entries_trends" %>
-    		</div>
-    	</div><!-- selectdetails -->	    
-	    
-	  </div> <!-- Details -->
+    </div>
 	
 	</div> <!-- Filter Data, Details --> 
 
-</div></div><!--/.container-fluid, row-->
+</div><!--/.container-fluid, row-->
