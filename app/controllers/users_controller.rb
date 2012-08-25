@@ -1,4 +1,7 @@
+include ActionView::Helpers::NumberHelper
+
 class UsersController < ApplicationController
+  before_filter :authorize, :only => :show
   
   def new
     @user = User.new
@@ -61,6 +64,7 @@ class UsersController < ApplicationController
   
   
   def show
+    @is_user_page = true
     @user = params[:id] ? User.find(params[:id]) : current_user
     @company = my_company
     
@@ -78,7 +82,7 @@ class UsersController < ApplicationController
   	end
   	
   	# FIND ENTRIES FILTERED BY DATE
-  	@entries = my_company.entries.where("cal_date >= ? AND cal_date <= ?", @myfrom, @myto).order('cal_date DESC')
+  	@entries = @user.entries.where("cal_date >= ? AND cal_date <= ?", @myfrom, @myto).order('cal_date DESC')
   	
   	# LOGIC FOR PROJECTS/EMPLOYEES FILTER
   	if (!params[:filter].blank?)	
@@ -94,16 +98,17 @@ class UsersController < ApplicationController
   		@filter_projects = my_company.projects.map{|p| p.id.to_s}
   		@filter_employees = current_user.id.to_s
   	end
+  	@filter_employees = @user.id.to_s
   	
   	# NEXT ENTRY FILTER - PROJECTS
   	@entries = @entries.where("project_id in (?)", @filter_projects)
-  	
-  	# NEXT ENTRY FILTER - EMPLOYEES
-  	@entries = @entries.where("user_id in (?)", @filter_employees)
+    
+    # # NEXT ENTRY FILTER - EMPLOYEES
+    # @entries = @entries.where("user_id in (?)", @filter_employees)
     
     # VARIABLES - NEW ENTRY BOX
     @entry = Entry.new
-    @projects = find_company_projects_sum
+    @projects = find_my_projects_sum
     @employees = find_company_employees_sum
     
     # VARIABLES - ENTRY TABLE
@@ -197,9 +202,9 @@ class UsersController < ApplicationController
       end
 
       # USED FOR NEW ENTRY LISTS -- client/sum not needed?
-     	def find_company_projects_sum
+     	def find_my_projects_sum
      		# returns a mapping [project name, client info, sum of hours, id]
-     		my_company.projects.map{
+     		current_user.staffed_projects.map{
      			|p|[p.name, p.client, p.entries.reduce(0) do |sum, entry| 
      					sum = sum + entry.hours 
      				end, p.id

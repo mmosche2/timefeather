@@ -6,13 +6,27 @@
   <div class="row">
   
     <div class="span2 pullright">
-      <%= f.select :user_id, @employees, {:selected => @user.id}, {:class => "span2 clearbottommargin"} %> 
-      <p class="clearbottommargin"><%= link_to "+ new employee", new_user_path, :remote => true, :class => "popup_dialog smallfont" %></p>
+	  <% if @is_user_page %>
+			<span class="span2"><%= @user.name %></span>
+			<%= f.hidden_field :user_id, :value => @user.id %>
+	  <% else %>
+  	    	<%= f.select :user_id, @employees, {:selected => @user.id}, {:class => "span2 clearbottommargin"} %> 
+	      	<p class="clearbottommargin">
+				<%= link_to "+ new employee", new_user_path, :remote => true, :class => "popup_dialog smallfont" %>
+		  	</p>
+	  <% end %>
     </div>
   
     <div class="span2 pullright">
-      <%= f.select :project_id, @projects, {}, {:class => "span2 clearbottommargin"} %>
-      <p class="clearbottommargin"><%= link_to "+ new project", new_project_path, :remote => true, :class => "popup_dialog smallfont" %></p> 
+	  <% if !@is_user_page %>
+      		<span class="span2"><%= @project.name %></span>
+			<%= f.hidden_field :project_id, :value => @project.id %>
+	  <% else %>
+			<%= f.select :project_id, @projects, {}, {:class => "span2 clearbottommargin"} %>
+      		<p class="clearbottommargin">
+				<%= link_to "+ new project", new_project_path, :remote => true, :class => "popup_dialog smallfont" %>
+			</p>
+	  <% end %>
     </div>
   
     <div class="spanonefive">

@@ -96,6 +96,7 @@ class EntriesController < ApplicationController
   
 ##### TABLE #####
   def entrytable
+    @is_user_page = params[:is_user_page]
     @today = Date.today
     if (!params[:from].blank? && !params[:to].blank?)
   		@myfrom = Date.strptime(params[:from][0], "%b %e %Y")
