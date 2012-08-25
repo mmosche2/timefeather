@@ -12,10 +12,6 @@ footer {
 	color: #999999;
 }
 
-tr {
-	font-size: 11px;
-}
-
 form {
 	margin-bottom: 0px;
 }
@@ -91,7 +87,7 @@ th.edit {
 	margin-left: 20px;
 }
 
-.newentry, .feedback, .selectdetails, .filterdata {
+.newentry, .feedback, .selectdetails {
 	margin-bottom: 5px;
 /*	border: 1px black dashed;*/
 }
@@ -101,10 +97,6 @@ th.edit {
 	padding: 10px;
 	margin-bottom: 20px;
 }
-
-/*.filterdata {
-	border-right: 1px solid #D0D2D5;
-}*/
 
 .userinput {
 	margin-left: 0px;
@@ -130,9 +122,13 @@ th.edit {
 	width: 100px;
 }
 
+.centertext {
+	text-align: center;
+	text-decoration: underline;
+	color: black;
+}
 
-
-.projectlist {
+.themecolor {
 	color: #49afcd;
 }
 
@@ -182,13 +178,6 @@ th.edit {
 }
 
 
-
-
-
-.pullright {
-  text-align: right;
-}
-
 .smallfont {
   font-size: 10px;
 }
@@ -196,3 +185,23 @@ th.edit {
 .clearbottommargin {
   margin-bottom: 0px;
 }
+
+.displayinline {
+	display: inline-block;
+}
+
+/*
+.viewselect {
+	text-align: center;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+	border-bottom: 1px solid #D0D2D5;
+	
+}*/
+/*
+.filterform {
+  display: inline-block;
+  text-align: center;
+  margin-bottom: 10px;
+}
+*/

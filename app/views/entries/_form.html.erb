@@ -7,12 +7,12 @@
   
     <div class="span2 pullright">
       <%= f.select :user_id, @employees, {:selected => @user.id}, {:class => "span2 clearbottommargin"} %> 
-      <p><%= link_to "+ new employee", new_user_path, :remote => true, :class => "popup_dialog smallfont" %></p>
+      <p class="clearbottommargin"><%= link_to "+ new employee", new_user_path, :remote => true, :class => "popup_dialog smallfont" %></p>
     </div>
   
     <div class="span2 pullright">
       <%= f.select :project_id, @projects, {}, {:class => "span2 clearbottommargin"} %>
-      <p><%= link_to "+ new project", new_project_path, :remote => true, :class => "popup_dialog smallfont" %></p> 
+      <p class="clearbottommargin"><%= link_to "+ new project", new_project_path, :remote => true, :class => "popup_dialog smallfont" %></p> 
     </div>
   
     <div class="spanonefive">
@@ -22,15 +22,12 @@
     <div class="span1">
       <%= f.text_field :hours, { :class => "span1", :placeholder => "hours" } %>
     </div>
-  
-  </div> <!-- row -->
 
-  <div class="row">
-    <div class="span5">
-      <%= f.text_area :notes, { :class => "span5 clearbottommargin", :placeholder => "note", :rows => 2 } %>
+    <div class="span4">
+      <%= f.text_area :notes, { :class => "span4 clearbottommargin", :placeholder => "note", :rows => 1 } %>
     </div>
     <div class="span1">
-     <%= f.submit "Submit Entry", :class => "btn btn-warning submitbutton clearbottommargin" %>
+     <%= f.submit "Add Entry", :class => "btn btn-warning clearbottommargin" %>
     </div>  
   </div> <!-- row -->
   
