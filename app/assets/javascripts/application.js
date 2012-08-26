@@ -34,21 +34,43 @@ $(document).ready( function() {
 		
 	$('.best_in_place').best_in_place();	
 	
-	var $dialog = $('<div id="popup_dialog_box"></div>')
+	var $dialog_project = $('<div id="popup_dialog_box_project"></div>')
 			.html("")
 			.dialog({
 				autoOpen: false,
 				height: 300,
 				width: 450,
 				modal: true,
-				title: 'Add New'
+				title: 'Add New Project'
 			});
-			
-	$('a.popup_dialog').click(function() {
-		$dialog.dialog('open');				
+	var $dialog_employee = $('<div id="popup_dialog_box_employee"></div>')
+			.html("")
+			.dialog({
+				autoOpen: false,
+				height: 300,
+				width: 450,
+				modal: true,
+				title: 'Add New Employee'
+			});
+	var $dialog_staffing = $('<div id="popup_dialog_box_staffing"></div>')
+			.html("")
+			.dialog({
+				autoOpen: false,
+				height: 300,
+				width: 450,
+				modal: true,
+				title: 'Add New Staffing'
+			});
+								
+	$('a.popup_dialog_project').click(function() {
+		$dialog_project.dialog('open');				
 	});
-	
-	
+	$('a.popup_dialog_employee').click(function() {
+		$dialog_employee.dialog('open');				
+	});
+	$('a.popup_dialog_staffing').click(function() {
+		$dialog_staffing.dialog('open');				
+	});
 	
 	$('.best_in_place').bind("ajax:success", function(xhr, data){
 		// highlight effect

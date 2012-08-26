@@ -16,24 +16,18 @@
         <div class="span2 pullright">
     	  <% if @is_user_page %>
           		<%= f.hidden_field :user_id, :value => @user.id %>
-    	  <% else %>
-      	    	<%= f.select :user_id, @employees, {:selected => @user.id}, {:class => "span2 clearbottommargin"} %> 
-    	      	<p class="clearbottommargin">
-    				<%= link_to "+ staffed employees", new_relationship_path(:project => @project), 
-								:remote => true, :class => "popup_dialog smallfont" %>
-    		  	</p>
-    	  <% end %>
-        </div>
-
-        <div class="span2 pullright">
-    	  <% if !@is_user_page %>
-    			<%= f.hidden_field :project_id, :value => @project.id %>
-    	  <% else %>
-    			<%= f.select :project_id, @projects, {}, {:class => "span2 clearbottommargin"} %>
+				<%= f.select :project_id, @projects, {}, {:class => "span2 clearbottommargin"} %>
           		<p class="clearbottommargin">
     				<%= link_to "+ staffed projects", new_relationship_path(:user => @user), 
-								:remote => true, :class => "popup_dialog smallfont" %>
+								:remote => true, :class => "popup_dialog_staffing smallfont" %>
     			</p>
+    	  <% else %>
+      	    	<%= f.hidden_field :project_id, :value => @project.id %>
+				<%= f.select :user_id, @employees, {:selected => @user.id}, {:class => "span2 clearbottommargin"} %> 
+    	      	<p class="clearbottommargin">
+    				<%= link_to "+ staffed employees", new_relationship_path(:project => @project), 
+								:remote => true, :class => "popup_dialog_staffing smallfont" %>
+    		  	</p>
     	  <% end %>
         </div>
 

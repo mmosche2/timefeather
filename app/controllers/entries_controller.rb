@@ -7,17 +7,28 @@ class EntriesController < ApplicationController
   end
 
   def create
-    @entry = Entry.new(params[:entry])
+    @entry_params = params[:entry]
+    @entry = Entry.new(@entry_params)
     if (@entry.notes.empty?)
         @entry.notes = "---"
     end
     
+    # REPLACED BY REDIRECT_TO :BACK
+    # @project = @entry_params[:project_id] ? Project.find(@entry_params[:project_id]) : nil
+    # @user = @entry_params[:user_id] ? User.find(@entry_params[:user_id]) : nil
+    # 
+    # if @entry_params.first[0] == "user_id"
+    #   @myredirect = @user
+    # else
+    #   @myredirect = @project
+    # end
+    
 	  if @entry.save
 	    flash["alert alert-success"] = 'Entry was successfully created'
-  		redirect_to root_url
+  		redirect_to :back
   	else
   	  flash["alert alert-error"] = "Invalid Time Entry" 
-  		redirect_to root_url
+  		redirect_to :back
   	end
   end
   
@@ -277,7 +288,7 @@ class EntriesController < ApplicationController
     @entry.destroy
 
     flash["alert"] = 'Entry was deleted'
-    redirect_to root_url 
+    redirect_to :back 
   end
   
   

@@ -21,8 +21,8 @@ class RelationshipsController < ApplicationController
   def create
     @relationship_params = params[:relationship]
 
-    @project = @relationship_params[:project_id] ? Project.find(params[:relationship][:project_id]) : nil
-    @user = @relationship_params[:user_id] ? User.find(params[:relationship][:user_id]) : nil
+    @project = @relationship_params[:project_id] ? Project.find(@relationship_params[:project_id]) : nil
+    @user = @relationship_params[:user_id] ? User.find(@relationship_params[:user_id]) : nil
     
     if @relationship_params.first[0] == "user_id"
       @myredirect = @user
