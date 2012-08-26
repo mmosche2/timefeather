@@ -93,8 +93,8 @@ $(document).ready( function() {
 		
 		$("div#entrytable_sum").html('<p class="totalrow">' + hours_sum + ' hours</p>');
 		
-		$("#filter_employees_"+user_id+"_text").html(user_name+' ('+user_sum+')');
-		$("#filter_projects_"+project_id+"_text").html(project_name+' ('+project_sum+')');
+		$("#filter_employees_"+user_id+"_text").attr('data-original-title', user_sum + ' total hours');
+		$("#filter_projects_"+project_id+"_text").attr('data-original-title', project_sum + ' total hours');
 	});
 	
 	// /////////// NOT USED ANYMORE ///////////
