@@ -233,8 +233,11 @@ th.edit {
 	margin-left: 800px;
 }
 
-.viewdetails {
-	margin-top: -100px;
+.viewdetailsproject {
+	margin-top: -150px;
+}
+.viewdetailsuser {
+	margin-top: -120px;
 }
 
 /*Cmpanies CSS*/

@@ -1,5 +1,5 @@
 <% @projects.each do |p| %>	
-  <label>
+  <label class="span2">
 	  <%= check_box(:filter, :projects, {:multiple => true, :checked => @filter_projects.include?(p[3].to_s)}, p[3], nil)%>
     <span class="tips" id="filter_projects_<%= p[3] %>_text" title="<%= p[2] %> total hours"> <%= link_to p[0], project_path(p[3]) %> </span>
   </label>
