@@ -175,6 +175,7 @@ class EntriesController < ApplicationController
  
 ##### TRENDS #####
   def entrytrends
+    @is_user_page = params[:is_user_page]
     @today = Date.today
     if (!params[:from].blank? && !params[:to].blank?)
   		@myfrom = Date.strptime(params[:from][0], "%b %e %Y")
@@ -237,6 +238,32 @@ class EntriesController < ApplicationController
  				end
  			]]   	  
  	  end
+ 	  
+ 	  
+ 	  # DETERMINE USER METRICS
+  	@firstofweek = @today.beginning_of_week
+  	@firstofmonth = @today.beginning_of_month
+  	@firstofyear = @today.beginning_of_year
+  	
+  	@my_week_sum = find_entries_sum(@firstofweek, @today)
+  	@my_month_sum = find_entries_sum(@firstofmonth, @today)
+  	@my_year_sum = find_entries_sum(@firstofyear, @today)
+  	
+  	@workdays_week = business_days_between(@firstofweek, @today+1)
+  	@workdays_month = business_days_between(@firstofmonth, @today+1)
+  	@workdays_year = business_days_between(@firstofyear, @today+1)
+  	
+  	@workhours_week = @workdays_week*EXPECTED_DAILY_HOURS
+  	@workhours_month = @workdays_month*EXPECTED_DAILY_HOURS
+  	@workhours_year = @workdays_year*EXPECTED_DAILY_HOURS
+  	
+    @workhours_week = @workhours_week == 0 ? 1 : @workhours_week
+  	@workhours_month = @workhours_month == 0 ? 1 : @workhours_month
+  	@workhours_year = @workhours_year == 0 ? 1 : @workhours_year
+  	
+  	@utilization_week = number_to_percentage((@my_week_sum/@workhours_week)*100, :precision => 0)
+  	@utilization_month = number_to_percentage((@my_month_sum/@workhours_month)*100, :precision => 0)
+  	@utilization_year = number_to_percentage((@my_year_sum/@workhours_year)*100, :precision => 0)
 
   end
   
@@ -280,6 +307,15 @@ class EntriesController < ApplicationController
 
   	
 
+    def business_days_between(date1, date2)
+      business_days = 0
+      date = date2
+      while date > date1
+       business_days = business_days + 1 unless date.saturday? or date.sunday?
+       date = date - 1.day
+      end
+      business_days
+    end
 
 
 end

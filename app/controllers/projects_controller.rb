@@ -115,7 +115,6 @@ class ProjectsController < ApplicationController
     
     
     # CREATE AND DISPLAY STAFFING RELATIONSHIP
-    @relationship = Relationship.new
     @staff = @project.reverse_relationships
     @staffed_employees = @project.staffed_users
     @company = my_company
@@ -137,6 +136,15 @@ class ProjectsController < ApplicationController
       @prev_month_sum = @prev_month_sum + (e.hours_sum.to_d * e.user.relationships.find_by_project_id(@project.id).rate)
     end
 
+
+    def projectstaff
+      # CREATE AND DISPLAY STAFFING RELATIONSHIP
+      @staff = @project.reverse_relationships
+      @staffed_employees = @project.staffed_users
+      @company = my_company
+      @notstaffed_employees = @company.users - @staffed_employees
+      @notstaffed_employees.map{|u|[u.name, u.id]}
+    end
     
     
     

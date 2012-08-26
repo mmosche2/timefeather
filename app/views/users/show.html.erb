@@ -38,7 +38,7 @@
           <% end %>        		  
           <br />
   			  <%= link_to entrytrends_path(:sort => "cal_date", :direction => "desc", :myfrom => @myfrom, :myto => @myto, 
-					    :filter_projects => @filter_projects, :filter_employees => @filter_employees), 
+					    :filter_projects => @filter_projects, :filter_employees => @filter_employees, :is_user_page => true), 
   					  :remote => true, :id => "EntriesTrends_btn", :class => "buttonleft btn btn-info" do %>
               <i class="icon-signal icon-white"></i> Trends
           <% end %>

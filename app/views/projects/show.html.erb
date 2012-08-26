@@ -62,8 +62,16 @@
 			<%= link_to "Trends", entrytrends_path(:sort => "cal_date", :direction => "desc",
       											   :myfrom => @myfrom, :myto => @myto, 
       											   :filter_projects => @filter_projects,
-      											   :filter_employees => @filter_employees), 
+      											   :filter_employees => @filter_employees, 
+												   :is_user_page => false), 
       					:remote => true, :id => "EntriesTrends_btn", :class => "btn btn-info" %>
+
+
+			<%= link_to "Staff", projectstaff_path(:sort => "cal_date", :direction => "desc",
+			      									:myfrom => @myfrom, :myto => @myto, 
+			      									:filter_projects => @filter_projects,
+			      									:filter_employees => @filter_employees), 
+			      		:remote => true, :id => "EntriesTrends_btn", :class => "btn btn-info" %>
           
           
         </div>
