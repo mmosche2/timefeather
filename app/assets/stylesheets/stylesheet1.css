@@ -1,6 +1,6 @@
 body {
-	background: url("subtle_dots.png");
-    padding-top: 50px;
+	background: url("snow.png");
+    padding-top: 30px;
     padding-bottom: 40px;
 }
 
@@ -22,6 +22,7 @@ form {
 }
 
 fieldset {
+	background: white;
 	border: 1px solid #D0D2D5;
 	-moz-box-shadow: inset 0 1px 0 #fff,0 1px 0 #fff;
 	-o-box-shadow: inset 0 1px 0 #fff,0 1px 0 #fff;
@@ -33,6 +34,9 @@ fieldset {
 }
 
 legend {
+	background: white;
+	border: 1px solid #D0D2D5;
+	
 	display: inline;
 /*  width: 100%;*/
 	padding: 0px 5px;
@@ -40,9 +44,9 @@ legend {
 	font-size: 16px;
 	line-height: 24px;
 	color: #faa732;
-	border: 0;
+/*	border: 0;
 	border-bottom: none;
-
+*/
 	font-weight: bold;
 }
 
@@ -81,7 +85,7 @@ th.edit {
 .mainpage {
 	margin-top: 25px;
 	padding: 10px;
-	background: white;
+/*	background: white;*/
 }
 
 .sidebar-nav {
@@ -192,6 +196,10 @@ th.edit {
   margin-bottom: 0px;
 }
 
+.clearleftmargin {
+	margin-left: 0px;
+}
+
 .hoursfont {
 	color: #faa732; 
 }
@@ -201,7 +209,6 @@ th.edit {
 
 .datatable {
   padding: 10px;
-  margin-left: 10px;
 }
 
 .utilization {
@@ -225,7 +232,7 @@ th.edit {
 }
 
 .viewselect {
-	margin-left: 800px;
+	margin-left: 810px;
 }
 
 .viewdetailsproject {

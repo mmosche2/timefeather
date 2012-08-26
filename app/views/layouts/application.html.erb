@@ -4,7 +4,7 @@
   <title>Timefeather</title>
   <%= stylesheet_link_tag    "application", :media => "all" %>
   <%= csrf_meta_tags %>
-
+  
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
@@ -27,7 +27,7 @@
       		    <a href="#Settings" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.name %> <b class="caret"></b></a>
         		  <ul class="dropdown-menu">
           			<li><%= link_to company_path(my_company.id) do %><i class="icon-home"></i> My Company<% end %></li>
-                <!-- <li><%= link_to root_url do %><i class="icon-folder-open"></i> My Projects<% end %></li> -->
+                <!-- <li><%= link_to root_url do %><i class="icon-folder-open"></i> My Projects<% end %></li> --> 
           			<li><%= link_to root_url do %><i class="icon-pencil"></i> My Entries<% end %></li>
           			<li><%= link_to account_path do %><i class="icon-wrench"></i> Settings <% end %></li>	
           			<li><%= link_to logout_path do %><i class="icon-off"></i> Log Out <% end %></li>
