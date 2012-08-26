@@ -12,6 +12,11 @@ footer {
 	color: #999999;
 }
 
+h4 {
+	text-decoration: underline;
+	text-align: center;	
+}
+
 form {
 	margin-bottom: 0px;
 }
@@ -187,21 +192,16 @@ th.edit {
   margin-bottom: 0px;
 }
 
-/*Companies CSS:*/
-
-.titleitem {
-  text-decoration: underline;
-  text-align: center;
+.hoursfont {
+	color: #faa732; 
 }
+
+
+/*Companies CSS:*/
 
 .datatable {
   padding: 10px;
   margin-left: 10px;
-
-/*  border-top: 1px solid #D0D2D5;
-  border-left: 1px solid #D0D2D5;*/
-
-/*	background: #D0D2D5;*/
 }
 
 .utilization {
@@ -214,11 +214,6 @@ th.edit {
   	padding-left: 30px;
   	padding-top: 10px;
   	padding-bottom: 10px;
-  
-/*  	border-top: 1px solid #D0D2D5;
-  	border-right: 1px solid #D0D2D5;*/
-
-/*	background: #D0D2D5;*/
 
 	margin-left: 0px;
 }

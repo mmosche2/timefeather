@@ -19,69 +19,31 @@
 	      </a>
 		  <%= link_to "TimeFeather", root_url, :class => "brand topleftimage" %>
 	      <div class="nav-collapse">
-			<ul class="nav pull-right">
+			    <ul class="nav pull-right">
 	
-			<% if signed_in? %>
-		  	
-			<!-- USER IS SIGNED IN -->
+      			<% if signed_in? %> <!-- USER IS SIGNED IN -->
 	        
-	          <li class="dropdown">
-					<%= link_to "Company", company_path(my_company.id) %>
+            <li class="dropdown">
+      		    <a href="#Settings" class="dropdown-toggle" data-toggle="dropdown"><%= current_user.name %> <b class="caret"></b></a>
+        		  <ul class="dropdown-menu">
+          			<li><%= link_to company_path(my_company.id) do %><i class="icon-home"></i> My Company<% end %></li>
+                <!-- <li><%= link_to root_url do %><i class="icon-folder-open"></i> My Projects<% end %></li> -->
+          			<li><%= link_to root_url do %><i class="icon-pencil"></i> My Entries<% end %></li>
+          			<li><%= link_to account_path do %><i class="icon-wrench"></i> Settings <% end %></li>	
+          			<li><%= link_to logout_path do %><i class="icon-off"></i> Log Out <% end %></li>
+      	      </ul>
+      		  </li> <!-- dropdown -->
 
-		        </li> <!-- dropdown -->
-		        <li class="dropdown">
-	  			   	<a href="#Settings" class="dropdown-toggle" data-toggle="dropdown">
-						<%= current_user.name %>
-					<b class="caret"></b></a>
-	  			   	<ul class="dropdown-menu">
-	    			  	<li>
-							<%= link_to account_path do %>
-								<i class="icon-user"></i> Account
-							<% end %>
-						</li>	
-	    			  	<li>
-							<%= link_to logout_path do %>
-								<i class="icon-off"></i> Log Out
-							<% end %>
-						
-						</li>
-		         	</ul>
-		        </li> <!-- dropdown -->
-		        <li class="dropdown">
-	  			   	<a href="#Contact" class="dropdown-toggle" data-toggle="dropdown">
-						Help
-					<b class="caret"></b></a>
-	  			   	<ul class="dropdown-menu">
-	    	 		  <li><a href="#"><i class="icon-question-sign"></i> FAQ</a></li>
-	    			  <li><a href="#"><i class="icon-comment"></i> Contact Us</a></li>	
-	    			  <li><a href="#"><i class="icon-leaf"></i> About</a></li>
-		         	</ul>
-		        </li> <!-- dropdown -->
-	        
-	      
-		
-			<% else %>
-			
-			<!-- USER SIGNED OUT -->
+      			<% else %> <!-- USER SIGNED OUT -->
 	
-				<li class="dropdown">
-	  			   	<a href="#Contact" class="dropdown-toggle" data-toggle="dropdown">
-						Help
-					<b class="caret"></b></a>
-	  			   	<ul class="dropdown-menu">
-	    	 		  <li><a href="#"><i class="icon-question-sign"></i> FAQ</a></li>
-	    			  <li><a href="#"><i class="icon-comment"></i> Contact Us</a></li>	
-	    			  <li><a href="#"><i class="icon-leaf"></i> About</a></li>
-		         	</ul>
-		        </li> <!-- dropdown -->
-				<li class="dropdown">
-					<%= link_to "Login", login_path, :class => "dropdown-toggle" %>
-		        </li> <!-- dropdown -->
+      				<li class="dropdown">
+      					<%= link_to "Login", login_path, :class => "dropdown-toggle" %>
+      		    </li> <!-- dropdown -->
 	
-			<% end %>
+      			<% end %>
 		
-				</ul>
-			</div><!--/.nav-collapse -->
+				  </ul>
+			  </div><!--/.nav-collapse -->
 	    </div>
 	  </div>
 	</div>
@@ -111,18 +73,7 @@
 	  // Load the Visualization API and the piechart package.
       google.load('visualization', '1.0', {'packages':['corechart']});
 
-      // Set a callback to run when the Google Visualization API is loaded.
-      google.setOnLoadCallback(drawChart);
 
-      // Callback that creates and populates a data table,
-      // instantiates the pie chart, passes in the data and
-      // draws it.
-      function drawChart() {
-
-        // Create the data table.
-        var data1 = new google.visualization.DataTable();
-		var data2 = new google.visualization.DataTable();
-      }
     </script>
  
 

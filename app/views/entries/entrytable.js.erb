@@ -1,6 +1,8 @@
 $("#entrycalendar").addClass('hidden');
 $("#entrycalendar_sum").addClass('hidden');
 $('#entrytrends').addClass('hidden');
+$('#projectstaff').addClass('hidden');
+
 
 $("#entrytable").html("<%= escape_javascript( render('entries/entries_table') )%>");
 $("#entrytable_sum").html("<p class='totalrow'><%= escape_javascript( @hrs_sum.to_s) %> hours</p>");

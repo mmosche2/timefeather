@@ -1,7 +1,3 @@
-
- 
- <!-- Calendar View -->
-
 <div id="EntriesCalendar">
 	
   <!-- DISPLAY MONTH AND LINKS TO NEXT/PREV MONTH -->
@@ -19,7 +15,7 @@
     	<% if @cal_entry_array[date.day-1] && date.month == @date.month %>
 	      <ul>
 			<% if @cal_entry_array[date.day-1][1] != 0 %>
-	          <li><%= @cal_entry_array[date.day-1][1] %></li>
+	          <li class="hoursfont"><%= @cal_entry_array[date.day-1][1] %></li>
 			<% end %>
 	      </ul>
 	    <% end %>

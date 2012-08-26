@@ -138,12 +138,15 @@ class ProjectsController < ApplicationController
 
 
     def projectstaff
-      # CREATE AND DISPLAY STAFFING RELATIONSHIP
+      @project = Project.find(params[:project_id])
       @staff = @project.reverse_relationships
       @staffed_employees = @project.staffed_users
       @company = my_company
       @notstaffed_employees = @company.users - @staffed_employees
       @notstaffed_employees.map{|u|[u.name, u.id]}
+      
+      # FIND USERS ACTUAL HOURS
+      @user_entries = @project.entries.select("user_id, sum(hours) as hours_sum").group("user_id")
     end
     
     

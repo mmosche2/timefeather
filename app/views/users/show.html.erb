@@ -11,7 +11,7 @@
     
     <div class="span2 projectlist">
       <div class="row" id="listFilterProjects"><!-- List Projects -->
-			  <p class="titleitem span2">My Projects</p>
+			  <div class="span2"><h4>My Projects</h4></div>
 	      <%= render 'projects/filterlist' %>
       </div>    
     <div class="row"><div class="span2"><%= submit_tag "Filter Data", :name => nil , :class => "btn span2 "%></div></div>  
@@ -46,11 +46,11 @@
   	  <div class="viewdetailsuser"> <!-- View Details -->
         <div class="selectdetails">
       	  
-      	  <div class="span3">
-            From: <%= text_field(:from, '', :value => @myfrom.strftime('%h %-d %Y'), :class => "span1", :id => "startdate") %>
-  			    To: <%= text_field(:to, '', :value => @myto.strftime('%h %-d %Y'), :class => "span1", :id => "enddate") %>
+      	  <div class="span4">
+            From: <%= text_field(:from, '', :value => @myfrom.strftime('%h %-d %Y'), :class => "spanonefive", :id => "startdate") %>
+  			    To: <%= text_field(:to, '', :value => @myto.strftime('%h %-d %Y'), :class => "spanonefive", :id => "enddate") %>
         	</div></div> <!-- filterform -->
-        	<div class="span2"><%= submit_tag "Filter Data", :name => nil , :class => "btn span2 "%></div>
+        	<div class="span2"><%= submit_tag "Filter Data", :name => nil , :class => "btn spanonefive "%></div>
       	  <div id="entrytable_sum" style="margin-bottom: 20px">
             <p class="totalrow"><%= @hrs_sum %> hours</p>
           </div>

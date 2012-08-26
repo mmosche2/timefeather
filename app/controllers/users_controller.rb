@@ -108,7 +108,7 @@ class UsersController < ApplicationController
     
     # VARIABLES - NEW ENTRY BOX
     @entry = Entry.new
-    @projects = find_my_projects_sum
+    @projects = find_my_projects_sum(@user)
     @employees = find_company_employees_sum
     
     # VARIABLES - ENTRY TABLE
@@ -202,9 +202,9 @@ class UsersController < ApplicationController
       end
 
       # USED FOR NEW ENTRY LISTS -- client/sum not needed?
-     	def find_my_projects_sum
+     	def find_my_projects_sum (user)
      		# returns a mapping [project name, client info, sum of hours, id]
-     		current_user.staffed_projects.map{
+     		user.staffed_projects.map{
      			|p|[p.name, p.client, p.entries.reduce(0) do |sum, entry| 
      					sum = sum + entry.hours 
      				end, p.id

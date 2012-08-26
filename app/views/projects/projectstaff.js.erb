@@ -1,0 +1,10 @@
+$("#entrytable").addClass('hidden');
+$("#entrytable_sum").addClass('hidden');
+
+$("#entrycalendar").addClass('hidden');
+$("#entrycalendar_sum").addClass('hidden');
+
+$('#entrytrends').addClass('hidden');
+
+$('#projectstaff').html("<%= escape_javascript( render('projects/project_staff') )%>");
+$('#projectstaff').removeClass('hidden');

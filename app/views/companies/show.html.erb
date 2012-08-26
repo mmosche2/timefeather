@@ -1,37 +1,33 @@
 <div class="container mainpage">
+  
+  <h2><%= @company.name %></h2>
+  <br />
+
+  <div class="row">
+  
+    <div class="offset1 span3"><!-- All Projects -->
+      <h4>All Projects</h4>
+			<% @projects.each do |p| %>
+          <div class="span3">
+            <span class="tips" title="<%= p[2] %> total hours"><%= link_to p[0], project_path(p[3]) %></span>
+          </div>
+      <% end %>
+      
+			<%= link_to "+ new project", new_project_path, :remote => true, :class => "popup_dialog btn" %>      
+    </div>
 
 
-     <h2>Company: <%= @company.name %></h2>
-
-     <br />
-            
-
-        <div class="row themecolor">
-          <div id="listFilterProjects" class="offset1 span5"><!-- List Projects -->
-					
-					<%= link_to "+ new project", new_project_path, :remote => true, :class => "popup_dialog btn btn-warning" %>
-                     
-					<br /><br />
-
-					<% @projects.each do |p| %>
-                           <p class="tips" title="<%= p[2] %> total hours">
-                              <%= link_to p[0], project_path(p[3]) %>
-                           </p>
-                    <% end %>
-          </div> <!-- List Projects -->
-
-          <div id="listFilterEmployees" class="span5"><!-- List Employees -->  
-                     
-					<%= link_to "+ new employee", new_user_path, :remote => true, :class => "popup_dialog btn btn-warning" %>
-					<br /><br />
-					
-                    <% @employees.each do |u| %>
-                           <p class="tips" title="<%= u[2] %> total hours">
-                              <%= link_to u[0], user_path(u[3]) %>
-                           </p>
-                    <% end %>
-          </div><!-- List Employees -->     
-      </div> <!-- ProjectList Row -->
-
+    <div class="offset1 span3"><!-- All Employees -->
+      <h4>All Employees</h4>
+			<% @employees.each do |u| %>
+          <div class="span3">
+            <span class="tips" title="<%= u[2] %> total hours"><%= link_to u[0], user_path(u[3]) %></span>
+          </div>
+      <% end %>
+      
+      <%= link_to "+ new employee", new_user_path, :remote => true, :class => "popup_dialog btn" %>      
+    </div>  
+    
+  </div>
      
 </div><!-- container, mainpage-->
