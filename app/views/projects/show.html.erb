@@ -10,11 +10,15 @@
 
 
     <div class="span2 projectlist">
-      <div class="row"><!-- List Projects -->
-			  <div class="span2"><h4>Project Employees</h4></div>
-	      <%= render 'users/filterlist' %>
-      </div>    
-    <div class="row"><div class="spanonefive" style="text-align: center"><%= submit_tag "Filter Data", :name => nil , :class => "btn spanonefive"%></div></div>  
+      	<div class="row"><!-- List Projects -->
+			<div class="span2"><h4>Project Employees</h4></div>
+	      	<%= render 'users/filterlist' %>
+      	</div>    
+    	<div class="row">
+			<div class="spanonefive" style="text-align: center">
+				<%= submit_tag "Filter Data", :name => nil , :class => "btn spanonefive"%>
+			</div>
+		</div>  
     </div> <!-- Project List -->
 
 
@@ -51,16 +55,18 @@
   	  <div class="viewdetailsproject"> <!-- View Details -->
         <div class="selectdetails">
 
-      	  <div class="span4">
-            From: <%= text_field(:from, '', :value => @myfrom.strftime('%h %-d %Y'), :class => "spanonefive", :id => "startdate") %>
-  			    To: <%= text_field(:to, '', :value => @myto.strftime('%h %-d %Y'), :class => "spanonefive", :id => "enddate") %>
-        	</div></div> <!-- filterform -->
+      	  	<div class="span4">
+            	From: <%= text_field(:from, '', :value => @myfrom.strftime('%h %-d %Y'), 
+									 :class => "spanonefive", :id => "startdate") %>
+  			    To: <%= text_field(:to, '', :value => @myto.strftime('%h %-d %Y'), 
+								   :class => "spanonefive", :id => "enddate") %>
+        	</div>
         	<div class="spanonefive"><%= submit_tag "Filter Data", :name => nil , :class => "btn spanonefive"%></div>
-      	  <div id="entrytable_sum" style="margin-bottom: 20px">
-            <p class="totalrow"><%= @hrs_sum %> hours</p>
-          </div>
+      	  	<div id="entrytable_sum" style="margin-bottom: 20px">
+            	<p class="totalrow"><%= @hrs_sum %> hours</p>
+          	</div>
 
-          <div id="entrytable">
+          	<div id="entrytable">
       		  <%= render :partial => "entries/entries_table" %>
       		</div>
       		<div id="entrycalendar_sum" class="hidden">
@@ -72,40 +78,43 @@
       		<div id="entrytrends" class="hidden">
       			<%= render :partial => "entries/entries_trends" %>
       		</div>
+			
       		<div id="projectstaff" class="hidden">
       			<%= render :partial => "projects/project_staff" %>
       		</div>
       	</div><!-- selectdetails -->	    
   	  </div> <!-- View Details -->
+	
+		<!-- PROJECT SUMMARY DETAILS -->
+		<div class="span10">
+			<% if @project_budgeted_hours != 0 %>
+			 <div class=""><p>Budgeted vs. Actual Hours</p></div>
+		        <div class="span2 progress progress-striped progress-warning tips" 
+		              title="<%= @project_hours_sum.to_s %>/<%= @project_budgeted_hours %>"><div class="bar" 
+		              style="width: <%= @hours_percentage %>;">
+						<p><%= @hours_percentage %></p></div></div>
+		      </div>
+			<% end %>
+			<p>Project Budgeted Hours: <%= @project_budgeted_hours %> </p>
+			<p>Project Total Hours: <%= @project_hours_sum.to_s %> </p>
+			<p>Total Project Revenue: <%= number_to_currency(@project_total_revenue, :unit => "$") %> </p>
+			<p>Last Month Invoice Amount: <%= number_to_currency(@prev_month_sum, :unit => "$") %> </p>
 
+		</div>
+		
+		<div>
+			<p>Project Information - <%= link_to "edit", edit_project_path(@project) %></p>
+			<p>Project Description: <%= @project.client %></p>
+			<p>Budgeted Hours: <%= @project.budgeted_hrs %></p>
+		</div>
+		
+		
+		
     </div>
 
     <% end %>      
 
 
-      <!-- <div class="row"><div class="span3 borderleft utilization">
-        <fieldset>
-          <legend><%= @user.name %> - Utilization</legend>
-          <div class="row statusbar">
-            <div class="spanhalf"><p>Week</p></div>
-            <div class="span2 progress progress-striped progress-warning tips" 
-                  title="<%= @my_week_sum %>/<%= @workhours_week %>"><div class="bar" 
-                  style="width: <%= @utilization_week %>;"><p><%= @utilization_week %></p></div></div>
-          </div>
-          <div class="row statusbar">
-            <div class="spanhalf"><p>Month</p></div>
-            <div class="span2 progress progress-striped progress-warning tips" 
-                  title="<%= @my_month_sum %>/<%= @workhours_month %>"><div class="bar" 
-                  style="width: <%= @utilization_month %>;"><p><%= @utilization_month %></p></div></div>
-          </div>
-          <div class="row statusbar">
-            <div class="spanhalf"><p>Year</p></div>
-            <div class="span2 progress progress-striped progress-warning tips" 
-                  title="<%= @my_year_sum %>/<%= @workhours_year %>"><div class="bar" 
-                  style="width: <%= @utilization_year %>;"><p><%= @utilization_year %></p></div></div>
-          </div>
-        </fieldset>
-      </div></div> -->
 
 
 

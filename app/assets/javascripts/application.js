@@ -92,6 +92,7 @@ $(document).ready( function() {
 		
 		
 		$("div#entrytable_sum").html('<p class="totalrow">' + hours_sum + ' hours</p>');
+		$('#table_row_hours_sum').html(hours_sum);
 		
 		$("#filter_employees_"+user_id+"_text").attr('data-original-title', user_sum + ' total hours');
 		$("#filter_projects_"+project_id+"_text").attr('data-original-title', project_sum + ' total hours');

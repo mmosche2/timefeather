@@ -1,5 +1,4 @@
 $("#entrytable").addClass('hidden');
-$("#entrytable_sum").addClass('hidden');
 
 $("#entrycalendar").addClass('hidden');
 $("#entrycalendar_sum").addClass('hidden');
@@ -8,6 +7,7 @@ $('#projectstaff').addClass('hidden');
 
 $('#entrytrends').html("<%= escape_javascript( render('entries/entries_trends') )%>");
 
+$("#entrytable_sum").removeClass('hidden');
 $('#entrytrends').removeClass('hidden');
 
 

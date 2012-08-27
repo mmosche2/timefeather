@@ -22,7 +22,7 @@ class ProjectsController < ApplicationController
     @project = Project.find(params[:id])
 
     if @project.update_attributes(params[:project])
-        redirect_to root_url
+        redirect_to @project
     else
         render action: "edit" 
     end
@@ -124,6 +124,17 @@ class ProjectsController < ApplicationController
     # FIND USERS ACTUAL HOURS
     @user_entries = @project.entries.select("user_id, sum(hours) as hours_sum").group("user_id")
     
+    # CALCULATE TOTAL PROJECT REVENUE
+    @project_total_revenue = 0
+    @user_entries.each do |e|
+      @project_total_revenue = @project_total_revenue + 
+                               (e.hours_sum.to_d * e.user.relationships.find_by_project_id(@project.id).rate)
+    end
+    
+    # CALCULATE PROJECT HOURS SUM
+    @project_hours_sum = @project.entries.sum(:hours)
+    @project_budgeted_hours = @project.budgeted_hrs ? @project.budgeted_hrs : 0
+    @hours_percentage = number_to_percentage((@project_hours_sum.to_d/@project_budgeted_hours)*100, :precision => 0)
     
     # FIND RELEVANT ENTRIES FOR LAST MONTH'S INVOICE
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
@@ -147,6 +158,9 @@ class ProjectsController < ApplicationController
       
       # FIND USERS ACTUAL HOURS
       @user_entries = @project.entries.select("user_id, sum(hours) as hours_sum").group("user_id")
+      
+      # CALCULATE PROJECT HOURS SUM
+      @project_hours_sum = @project.entries.sum(:hours)
     end
     
     
