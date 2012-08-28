@@ -3,7 +3,7 @@
 
     <%= f.input :name %>
     <%= f.input :client, :input_html => { :rows => 2 }, :label => "Description", :placeholder => 'add project details here, like client info' %>
-	<%= f.input :budgeted_hrs, :label => 'Project Hours (budgeted)' %>
+	<%= f.input :budgeted_dollars, :label => 'Project Dollars (budgeted)' %>
     <%= f.hidden_field :company_id, :value => my_company.id %>
 	<%= f.button :submit %>
 

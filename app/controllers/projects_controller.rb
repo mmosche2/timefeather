@@ -132,11 +132,11 @@ class ProjectsController < ApplicationController
         @project_total_revenue = @project_total_revenue + (e.hours_sum.to_d * e_user.rate)
       end
     end
+    @project_budgeted_dollars = @project.budgeted_dollars ? @project.budgeted_dollars : 0
+    @dollars_percentage = number_to_percentage((@project_total_revenue.to_d/@project_budgeted_dollars)*100, :precision => 0)    
     
     # CALCULATE PROJECT HOURS SUM
     @project_hours_sum = @project.entries.sum(:hours)
-    @project_budgeted_hours = @project.budgeted_hrs ? @project.budgeted_hrs : 0
-    @hours_percentage = number_to_percentage((@project_hours_sum.to_d/@project_budgeted_hours)*100, :precision => 0)
     
     # FIND RELEVANT ENTRIES FOR LAST MONTH'S INVOICE
     @date = params[:date] ? Date.parse(params[:date]) : Date.today
