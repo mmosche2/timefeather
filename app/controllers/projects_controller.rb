@@ -59,11 +59,11 @@ class ProjectsController < ApplicationController
     	  end
     	  @filter_employees = params[:filter][:employees]  	
     	  if (@filter_employees.blank?) #if employee filter blank, set to current user
-    	    @filter_employees = current_user.id.to_s
+    	    @filter_employees = @project.staffed_users.map{|e| e.id.to_s}
   	    end
     	else
     		@filter_projects = my_company.projects.map{|p| p.id.to_s}
-    		@filter_employees = current_user.id.to_s
+    		@filter_employees = @project.staffed_users.map{|e| e.id.to_s}
     	end
     	@filter_projects = @project.id.to_s
 
@@ -133,7 +133,7 @@ class ProjectsController < ApplicationController
       end
     end
     @project_budgeted_dollars = @project.budgeted_dollars ? @project.budgeted_dollars : 0
-    @dollars_percentage = ((@project_total_revenue.to_d/@project_budgeted_dollars)*100).to_s + "%"   
+    @dollars_percentage = number_to_percentage((@project_total_revenue.to_d/@project_budgeted_dollars)*100, :precision => 0)
     
     # CALCULATE PROJECT HOURS SUM
     @project_hours_sum = @project.entries.sum(:hours)
