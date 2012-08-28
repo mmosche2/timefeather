@@ -133,7 +133,7 @@ class ProjectsController < ApplicationController
       end
     end
     @project_budgeted_dollars = @project.budgeted_dollars ? @project.budgeted_dollars : 0
-    @dollars_percentage = number_to_percentage((@project_total_revenue.to_d/@project_budgeted_dollars)*100, :precision => 0)    
+    @dollars_percentage = ((@project_total_revenue.to_d/@project_budgeted_dollars)*100).to_s + "%"   
     
     # CALCULATE PROJECT HOURS SUM
     @project_hours_sum = @project.entries.sum(:hours)

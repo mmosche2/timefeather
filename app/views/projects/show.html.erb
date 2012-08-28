@@ -18,27 +18,29 @@
     <div class="span3 projectlist">
       <div class="row well"> <!-- Feedback -->
     		
-    		<h4 class="smallbottommargin"><%= @project.name %></h4>
-    		<div>
-    			<% if @project_budgeted_hours != 0 %>
-    			 <div class="row statusbar">
-             <div class="spanhalf"><p>Progress: </p></div>
-             <div class="span2 progress progress-striped progress-warning tips" 
-                title="<%= @project_hours_sum.to_s %>/<%= @project_budgeted_hours %>">
-                <div class="bar" style="width: <%= @hours_percentage %>;">
-                <p><%= @hours_percentage %></p></div></div>
-           </div>
-    			<% end %>
-          <i><%= @project.client %></i>
-    			
-          <div class="row"><%= link_to "edit project", edit_project_path(@project), :class => "btn btn-mini offsetonefive" %></div>
+		<h4 class="smallbottommargin"><%= @project.name %></h4>
+		<div>
+			<% if @project_budgeted_hours != 0 %>
+			<div class="row statusbar">
+				<div class="spanhalf"><p>Progress: </p></div>
+				<div class="span2 progress progress-striped progress-warning tips" 
+				title="<%= @project_total_revenue.to_s %>/<%= @project_budgeted_dollars %>">
+				<div class="bar" style="width: <%= @dollars_percentage %>;">
+					<p><%= @dollars_percentage %></p></div></div>
+				</div>
+				<% end %>
+				<i><%= @project.client %></i>
+
+				<div class="row">
+					<%= link_to "edit project", edit_project_path(@project), :class => "btn btn-mini offsetonefive" %>
+				</div>
 
 
 <!--      <p>Total Project Revenue: <%= number_to_currency(@project_total_revenue, :unit => "$") %> </p>
           <p>Last Month Invoice Amount: <%= number_to_currency(@prev_month_sum, :unit => "$") %> </p>
-          <p>Project Budgeted Hours: <%= @project_budgeted_hours %> </p>
+          <p>Project Budgeted Dollars: <%= @project_budgeted_dollars %> </p>
           <p>Project Total Hours: <%= @project_hours_sum.to_s %> </p>
-          <p>Budgeted Hours: <%= @project.budgeted_hrs %></p>
+          <p>Budgeted Hours: <%= @project.budgeted_dollars %></p>
           
  -->
 
