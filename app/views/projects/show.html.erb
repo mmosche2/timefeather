@@ -15,8 +15,37 @@
 
     <%= form_tag project_path(@project.id), :method => 'get' do %> <!-- Creates the form filter -->        
 
+    <div class="span3 projectlist">
+      <div class="row well"> <!-- Feedback -->
+    		
+    		<h4 class="smallbottommargin"><%= @project.name %></h4>
+    		<div>
+    			<% if @project_budgeted_hours != 0 %>
+    			 <div class="row statusbar">
+             <div class="spanhalf"><p>Progress: </p></div>
+             <div class="span2 progress progress-striped progress-warning tips" 
+                title="<%= @project_hours_sum.to_s %>/<%= @project_budgeted_hours %>">
+                <div class="bar" style="width: <%= @hours_percentage %>;">
+                <p><%= @hours_percentage %></p></div></div>
+           </div>
+    			<% end %>
+          <i><%= @project.client %></i>
+    			
+          <div class="row"><%= link_to "edit project", edit_project_path(@project), :class => "btn btn-mini offsetonefive" %></div>
 
-    <div class="span2 projectlist">
+
+<!--      <p>Total Project Revenue: <%= number_to_currency(@project_total_revenue, :unit => "$") %> </p>
+          <p>Last Month Invoice Amount: <%= number_to_currency(@prev_month_sum, :unit => "$") %> </p>
+          <p>Project Budgeted Hours: <%= @project_budgeted_hours %> </p>
+          <p>Project Total Hours: <%= @project_hours_sum.to_s %> </p>
+          <p>Budgeted Hours: <%= @project.budgeted_hrs %></p>
+          
+ -->
+
+    		</div>        
+      
+      </div> <!-- Feedback -->
+      	
       	<div class="row"><!-- List Projects -->
 			<div class="span2">
             	<p>From: <%= text_field(:from, '', :value => @myfrom.strftime('%h %-d %Y'), 
@@ -36,7 +65,7 @@
     </div> <!-- Project List -->
 
 
-    <div class="span10 datatable clearleftmargin">
+    <div class="span9 datatable clearleftmargin">
 
       <div class="viewselect">
         <div data-toggle="buttons-radio">
@@ -93,28 +122,7 @@
   	  </div> <!-- View Details -->
 	
 		<!-- PROJECT SUMMARY DETAILS -->
-		<div class="span10">
-			<% if @project_budgeted_hours != 0 %>
-			 <div class=""><p>Budgeted vs. Actual Hours</p></div>
-		        <div class="span2 progress progress-striped progress-warning tips" 
-		              title="<%= @project_hours_sum.to_s %>/<%= @project_budgeted_hours %>"><div class="bar" 
-		              style="width: <%= @hours_percentage %>;">
-						<p><%= @hours_percentage %></p></div></div>
-		      </div>
-			<% end %>
-			<p>Project Budgeted Hours: <%= @project_budgeted_hours %> </p>
-			<p>Project Total Hours: <%= @project_hours_sum.to_s %> </p>
-			<p>Total Project Revenue: <%= number_to_currency(@project_total_revenue, :unit => "$") %> </p>
-			<p>Last Month Invoice Amount: <%= number_to_currency(@prev_month_sum, :unit => "$") %> </p>
 
-		</div>
-		
-		<div>
-			<p>Project Information - <%= link_to "edit", edit_project_path(@project) %></p>
-			<p>Project Description: <%= @project.client %></p>
-			<p>Budgeted Hours: <%= @project.budgeted_hrs %></p>
-		</div>
-		
 		
 		
     </div>

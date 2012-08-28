@@ -97,13 +97,12 @@ abbr[title] {
 /*	background: white;*/
 }
 
-.sidebar-nav {
-	padding: 9px 0;
+.smallbottommargin {
+	margin-bottom: 7px;
 }
 
-.spanhalf {
-	width: 40px;
-	margin-left: 20px;
+.sidebar-nav {
+	padding: 9px 0;
 }
 
 .newentry, .feedback, .selectdetails {
@@ -122,10 +121,7 @@ abbr[title] {
 	margin-bottom: 10px;
 }
 
-.spanonefive {
-	margin-left: 20px;
-	width: 100px;
-}
+
 .btn-right{
 	float:right;
 }
@@ -154,9 +150,10 @@ abbr[title] {
 .dateselect {
 	margin-bottom: 10px;
 }
-	.dateselect .span1{
-		width: 80px;
-	}
+
+.dateselect .span1{
+	width: 80px;
+}
 
 .navbar-inner { /*Changes the header colors/shadow effects*/
   min-height: 40px;
@@ -190,6 +187,20 @@ abbr[title] {
 
 .offsethalf {
 	margin-left: 40px;
+}
+
+.offsetonefive {
+	margin-left: 150px;
+}
+
+.spanhalf {
+	width: 40px;
+	margin-left: 20px;
+}
+
+.spanonefive {
+	margin-left: 20px;
+	width: 100px;
 }
 
 .statusbar .progress {
