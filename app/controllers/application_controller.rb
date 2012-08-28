@@ -9,6 +9,10 @@ class ApplicationController < ActionController::Base
       @current_user ||= User.find_by_auth_token( cookies[:auth_token] ) if cookies[:auth_token] 
     end
     
+    def my_projects
+      @my_projects ||= current_user.staffed_projects if current_user
+    end
+    
     def my_company
       @my_company ||= current_user.company if current_user
     end
@@ -24,7 +28,7 @@ class ApplicationController < ActionController::Base
     helper_method :current_user
     helper_method :my_company
     helper_method :signed_in?
-    
+    helper_method :my_projects
     
     def sort_column
        Entry.column_names.include?(params[:sort]) ? params[:sort] : "name"

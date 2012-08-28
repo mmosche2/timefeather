@@ -7,53 +7,49 @@
     
     <%= form_tag root_url, :method => 'get' do %> <!-- Creates the form filter -->        
     
-    
-    <div class="span3 projectlist">
-      
-        <div class="span3 projectlist">
-          <div class="row well"> <!-- Feedback -->
-
-        		<h4 class="smallbottommargin"><%= @user.name %>'s Utilization</h4>
-            <div class="row statusbar">
-              <div class="spanhalf"><p>Week</p></div>
-              <div class="span2 progress progress-striped progress-warning tips" 
-                    title="<%= @my_week_sum %>/<%= @workhours_week %>"><div class="bar" 
-                    style="width: <%= @utilization_week %>;"><p><%= @utilization_week %></p></div></div>
-            </div>
-            <div class="row statusbar">
-              <div class="spanhalf"><p>Month</p></div>
-              <div class="span2 progress progress-striped progress-warning tips" 
-                    title="<%= @my_month_sum %>/<%= @workhours_month %>"><div class="bar" 
-                    style="width: <%= @utilization_month %>;"><p><%= @utilization_month %></p></div></div>
-            </div>
-            <div class="row statusbar">
-              <div class="spanhalf"><p>Year</p></div>
-              <div class="span2 progress progress-striped progress-warning tips" 
-                    title="<%= @my_year_sum %>/<%= @workhours_year %>"><div class="bar" 
-                    style="width: <%= @utilization_year %>;"><p><%= @utilization_year %></p></div></div>
-            </div>
-    
-    
-
-          </div> <!-- Feedback -->
-        </div>
-      
+    <div class="span3 projectlist">    
       
       <div class="row" id="listFilterProjects"><!-- List Projects -->
-			<div class="span2">
-            	<p>From: <%= text_field(:from, '', :value => @myfrom.strftime('%h %-d %Y'), 
-							:class => "spanonefive", :id => "startdate") %> </p>
+			<div class="span3">
+          	<p>From: <%= text_field(:from, '', :value => @myfrom.strftime('%h %-d %Y'), 
+						:class => "spanonefive", :id => "startdate") %> </p>
 				
-  			    <p>To: <br /><%= text_field(:to, '', :value => @myto.strftime('%h %-d %Y'), 
+  			    <p>To: <%= text_field(:to, '', :value => @myto.strftime('%h %-d %Y'), 
 							:class => "spanonefive", :id => "enddate") %> </p>
         	</div>
 
-			<div class="span2">
+			<div class="span3">
 				<h4>My Projects</h4>
 			</div>
 	      	<%= render 'projects/filterlist' %>
       </div>    
-    <div class="row"><div class="span2"><%= submit_tag "Filter Data", :name => nil , :class => "btn span2 "%></div></div>  
+    <div class="row"><div class="span3 smallbottommargin">
+          <%= submit_tag "Filter Data", :name => nil , :class => "btn span2 "%></div>
+    </div>  
+    
+    
+    <div class="row well"> <!-- Feedback -->
+  		<h4 class="smallbottommargin"><%= @user.name %>'s Utilization</h4>
+      <div class="row statusbar">
+        <div class="spanhalf"><p>Week</p></div>
+        <div class="span2 progress progress-striped progress-warning tips" 
+              title="<%= @my_week_sum %>/<%= @workhours_week %>"><div class="bar" 
+              style="width: <%= @utilization_week %>;"><p><%= @utilization_week %></p></div></div>
+      </div>
+      <div class="row statusbar">
+        <div class="spanhalf"><p>Month</p></div>
+        <div class="span2 progress progress-striped progress-warning tips" 
+              title="<%= @my_month_sum %>/<%= @workhours_month %>"><div class="bar" 
+              style="width: <%= @utilization_month %>;"><p><%= @utilization_month %></p></div></div>
+      </div>
+      <div class="row statusbar">
+        <div class="spanhalf"><p>Year</p></div>
+        <div class="span2 progress progress-striped progress-warning tips" 
+              title="<%= @my_year_sum %>/<%= @workhours_year %>"><div class="bar" 
+              style="width: <%= @utilization_year %>;"><p><%= @utilization_year %></p></div></div>
+      </div>  
+    </div> <!-- Feedback -->
+        
     </div> <!-- Project List -->
 
 

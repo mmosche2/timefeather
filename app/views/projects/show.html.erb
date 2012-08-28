@@ -16,54 +16,61 @@
     <%= form_tag project_path(@project.id), :method => 'get' do %> <!-- Creates the form filter -->        
 
     <div class="span3 projectlist">
-      <div class="row well"> <!-- Feedback -->
-    		
-		<h4 class="smallbottommargin"><%= @project.name %></h4>
-		<div>
-			<% if @project_budgeted_hours != 0 %>
-			<div class="row statusbar">
-				<div class="spanhalf"><p>Progress: </p></div>
-				<div class="span2 progress progress-striped progress-warning tips" 
-				title="<%= @project_total_revenue.to_s %>/<%= @project_budgeted_dollars %>">
-				<div class="bar" style="width: <%= @dollars_percentage %>;">
-					<p><%= @dollars_percentage %></p></div></div>
-				</div>
-				<% end %>
-				<i><%= @project.client %></i>
-
-				<div class="row">
-					<%= link_to "edit project", edit_project_path(@project), :class => "btn btn-mini offsetonefive" %>
-				</div>
-
-
-<!--      <p>Total Project Revenue: <%= number_to_currency(@project_total_revenue, :unit => "$") %> </p>
-          <p>Last Month Invoice Amount: <%= number_to_currency(@prev_month_sum, :unit => "$") %> </p>
-          <p>Project Budgeted Dollars: <%= @project_budgeted_dollars %> </p>
-          <p>Project Total Hours: <%= @project_hours_sum.to_s %> </p>
-          <p>Budgeted Hours: <%= @project.budgeted_dollars %></p>
-          
- -->
-
-    		</div>        
-      
-      </div> <!-- Feedback -->
+    	<div class="span3"><h4>Filters</h4></div>
       	
       	<div class="row"><!-- List Projects -->
-			<div class="span2">
-            	<p>From: <%= text_field(:from, '', :value => @myfrom.strftime('%h %-d %Y'), 
-							:class => "spanonefive", :id => "startdate") %> </p>
-				
-  			    <p>To: <br /><%= text_field(:to, '', :value => @myto.strftime('%h %-d %Y'), 
+			    <div class="span3">
+          	<p>From: <%= text_field(:from, '', :value => @myfrom.strftime('%h %-d %Y'), 
+					    :class => "spanonefive", :id => "startdate") %> </p>
+			
+  			    <p>To: <%= text_field(:to, '', :value => @myto.strftime('%h %-d %Y'), 
 							:class => "spanonefive", :id => "enddate") %> </p>
         	</div>
-			<div class="span2"><h4>Project Employees</h4></div>
+
 	      	<%= render 'users/filterlist' %>
       	</div>    
     	<div class="row">
-			<div class="spanonefive" style="text-align: center">
+			<div class="spanonefive smallbottommargin" style="text-align: center">
 				<%= submit_tag "Filter Data", :name => nil , :class => "btn spanonefive"%>
 			</div>
 		</div>  
+   
+   
+      <div class="row well"> <!-- Feedback -->
+        		
+		    <h4 class="smallbottommargin"><%= @project.name %></h4>
+    		<div>
+    			<% if @project_budgeted_hours != 0 %>
+    			<div class="row statusbar">
+    				<div class="spanhalf"><p>Budget: </p></div>
+    				<div class="span2 progress progress-danger tips" 
+    				title="<%= @project_total_revenue.to_s %>/<%= @project_budgeted_dollars %>">
+    				<div class="bar" style="width: <%= @dollars_percentage %>;">
+    					<p><%= @dollars_percentage %></p></div></div>
+    				</div>
+    				<% end %>
+    				<i><%= @project.client %></i>
+
+    				<div class="row">
+    					<%= link_to "edit project", edit_project_path(@project), :class => "btn btn-mini offsetonefive" %>
+    				</div>
+
+
+    <!--      <p>Total Project Revenue: <%= number_to_currency(@project_total_revenue, :unit => "$") %> </p>
+              <p>Last Month Invoice Amount: <%= number_to_currency(@prev_month_sum, :unit => "$") %> </p>
+              <p>Project Budgeted Dollars: <%= @project_budgeted_dollars %> </p>
+              <p>Project Total Hours: <%= @project_hours_sum.to_s %> </p>
+              <p>Budgeted Hours: <%= @project.budgeted_dollars %></p>
+          
+     -->
+
+        		</div>        
+      
+          </div> <!-- Feedback -->   
+   
+   
+   
+   
     </div> <!-- Project List -->
 
 
@@ -72,7 +79,7 @@
       <div class="viewselect">
         <div data-toggle="buttons-radio">
           <%= link_to entrytable_path(:sort => "cal_date", :direction => "desc", :myfrom => @myfrom, :myto => @myto, 
-        			:filter_projects => @filter_projects, :filter_employees => @filter_employees, :is_user_page => true), 
+        			:filter_projects => @filter_projects, :filter_employees => @filter_employees, :is_user_page => false), 
         			:remote => true, :id => "EntriesTable_btn", :class => "buttonleft btn btn-info" do %>
         	    <i class="icon-th icon-white"></i> Entries	  
         	<% end %>
