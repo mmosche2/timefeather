@@ -67,6 +67,15 @@ th.edit {
 	font-size: 15px;
 }
 
+.simple_form .hint, .simple_form .error {
+	margin-left: 0px;
+}
+
+abbr[title] {
+  cursor: default;
+  border-bottom: none;
+}
+
 .navbar .brand {
 	color: white;
 	font-size: 30px;

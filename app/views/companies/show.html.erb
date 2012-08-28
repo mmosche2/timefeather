@@ -5,7 +5,7 @@
 
   <div class="row">
   
-    <div class="offset1 span3"><!-- All Projects -->
+    <div class="offset1 span4 well"><!-- All Projects -->
       <h4>All Projects</h4>
 			<% @projects.each do |p| %>
           <div class="span3">
@@ -13,11 +13,11 @@
           </div>
       <% end %>
       
-			<%= link_to "+ new project", new_project_path, :remote => true, :class => "popup_dialog_project btn" %>      
+			<%= link_to "+ new project", new_project_path, :remote => true, :class => "popup_dialog_project btn btn-mini offset2" %>      
     </div>
 
 
-    <div class="offset1 span3"><!-- All Employees -->
+    <div class="offset1 span4 well"><!-- All Employees -->
       <h4>All Employees</h4>
 			<% @employees.each do |u| %>
           <div class="span3">
@@ -25,7 +25,7 @@
           </div>
       <% end %>
       
-      <%= link_to "+ new employee", new_user_path, :remote => true, :class => "popup_dialog_employee btn" %>      
+      <%= link_to "+ new employee", new_user_path, :remote => true, :class => "popup_dialog_employee btn btn-mini offset2" %>      
     </div>  
     
   </div>
