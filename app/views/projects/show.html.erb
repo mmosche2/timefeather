@@ -1,4 +1,11 @@
-<div class="container mainpage">  
+
+
+	<% if @employees.empty? %>
+		<div class="alert">
+			<a class="close" data-dismiss="alert">x</a>
+			No one is staffed to this project!  Staff someone below.
+		</div>
+	<% end %>
   
   <div class="row"> <!-- New Entry -->  
 	  <div class="span12 new_entry_form_box"><%= render :partial => "entries/form" %></div>
@@ -125,7 +132,6 @@
 
 	</div> <!-- Filter Data, Details --> 
 
-</div><!--/.container-fluid, row-->
 
 
 
