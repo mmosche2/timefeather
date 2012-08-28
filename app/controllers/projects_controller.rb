@@ -127,8 +127,10 @@ class ProjectsController < ApplicationController
     # CALCULATE TOTAL PROJECT REVENUE
     @project_total_revenue = 0
     @user_entries.each do |e|
-      @project_total_revenue = @project_total_revenue + 
-                               (e.hours_sum.to_d * e.user.relationships.find_by_project_id(@project.id).rate)
+      e_user = e.user.relationships.find_by_project_id(@project.id)
+      if e_user
+        @project_total_revenue = @project_total_revenue + (e.hours_sum.to_d * e_user.rate)
+      end
     end
     
     # CALCULATE PROJECT HOURS SUM
@@ -144,7 +146,10 @@ class ProjectsController < ApplicationController
   	                                       group("user_id")
     @prev_month_sum = 0
     @prev_month_entries.each do |e|
-      @prev_month_sum = @prev_month_sum + (e.hours_sum.to_d * e.user.relationships.find_by_project_id(@project.id).rate)
+      e_user = e.user.relationships.find_by_project_id(@project.id)
+      if e_user
+        @prev_month_sum = @prev_month_sum + (e.hours_sum.to_d * e_user.rate)
+      end
     end
 
 

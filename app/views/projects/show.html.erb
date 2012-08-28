@@ -11,6 +11,13 @@
 
     <div class="span2 projectlist">
       	<div class="row"><!-- List Projects -->
+			<div class="span2">
+            	<p>From: <%= text_field(:from, '', :value => @myfrom.strftime('%h %-d %Y'), 
+							:class => "spanonefive", :id => "startdate") %> </p>
+				
+  			    <p>To: <br /><%= text_field(:to, '', :value => @myto.strftime('%h %-d %Y'), 
+							:class => "spanonefive", :id => "enddate") %> </p>
+        	</div>
 			<div class="span2"><h4>Project Employees</h4></div>
 	      	<%= render 'users/filterlist' %>
       	</div>    
@@ -55,13 +62,6 @@
   	  <div class="viewdetailsproject"> <!-- View Details -->
         <div class="selectdetails">
 
-      	  	<div class="span4">
-            	From: <%= text_field(:from, '', :value => @myfrom.strftime('%h %-d %Y'), 
-									 :class => "spanonefive", :id => "startdate") %>
-  			    To: <%= text_field(:to, '', :value => @myto.strftime('%h %-d %Y'), 
-								   :class => "spanonefive", :id => "enddate") %>
-        	</div>
-        	<div class="spanonefive"><%= submit_tag "Filter Data", :name => nil , :class => "btn spanonefive"%></div>
       	  	<div id="entrytable_sum" style="margin-bottom: 20px">
             	<p class="totalrow"><%= @hrs_sum %> hours</p>
           	</div>
